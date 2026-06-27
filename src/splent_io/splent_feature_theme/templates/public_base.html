@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang | default('en') }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page_description | default(site.tagline) }}">
+
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+
+    {% if theme_tokens and theme_tokens.font_url %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ theme_tokens.font_url }}">
+    {% endif %}
+    <style id="brand-tokens">{{ theme_tokens_css | safe }}</style>
+    <link rel="stylesheet" href="{{ url_for('theme.assets', subfolder='css', filename='public.css') }}">
+
+    {% block head %}{% endblock %}
+    {% for hook in get_template_hooks("layout.head") %}{{ hook() | safe }}{% endfor %}
+</head>
+
+<body class="cms-public">
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-brand" href="/">
+                {% if site.logo %}<img class="site-brand__logo" src="{{ url_for('static', filename=site.logo) }}" alt="{{ site.name }}">{% endif %}
+                <span class="site-brand__name">{{ site.name }}</span>
+            </a>
+            <nav class="site-nav" aria-label="Main navigation">
+                {% for item in site.nav %}<a href="{{ item.href }}">{{ item.label }}</a>{% endfor %}
+                {% for hook in get_template_hooks("layout.nav") %}{{ hook() | safe }}{% endfor %}
+                {% if site.locales and site.locales | length > 1 %}
+                <span class="lang-switch">
+                    {% for lc in site.locales %}<a class="lang-switch__opt {{ 'is-active' if lc == site.locale else '' }}" href="{{ url_for('theme.set_language', code=lc) }}">{{ lc | upper }}</a>{% endfor %}
+                </span>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    {% for hook in get_template_hooks("layout.hero") %}{{ hook() | safe }}{% endfor %}
+    {% block hero %}{% endblock %}
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <div class="site-footer__brand">
+                <span class="site-footer__name">{{ site.name }}</span>
+                {% if site.tagline %}<span class="site-footer__tagline">{{ site.tagline }}</span>{% endif %}
+            </div>
+            <ul class="site-social">
+                {% for s in site.social %}<li><a href="{{ s.href }}" target="_blank" rel="noopener" title="{{ s.network }}">{{ s.network }}</a></li>{% endfor %}
+                {% for hook in get_template_hooks("layout.footer") %}{{ hook() | safe }}{% endfor %}
+            </ul>
+        </div>
+        <div class="container site-footer__legal">© {{ site.name }}</div>
+    </footer>
+
+    {% for hook in get_template_hooks("layout.scripts") %}{{ hook() | safe }}{% endfor %}
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

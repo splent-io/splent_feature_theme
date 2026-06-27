@@ -1,0 +1,15 @@
+{# Composable hero block. Usage:
+   {{ render_block('hero', eyebrow='…', title='…', subtitle='…',
+                   cta_label='…', cta_href='…') }} #}
+<section class="block block-hero">
+    <div class="container">
+        {% if eyebrow %}<p class="hero-eyebrow">{{ eyebrow }}</p>{% endif %}
+        <h1 class="hero-title">{{ title }}</h1>
+        {% if subtitle %}<p class="hero-subtitle">{{ subtitle }}</p>{% endif %}
+        {% if cta_label %}
+        <p class="hero-actions">
+            <a class="btn btn-primary" href="{{ cta_href | default('#') }}">{{ cta_label }}</a>
+        </p>
+        {% endif %}
+    </div>
+</section>

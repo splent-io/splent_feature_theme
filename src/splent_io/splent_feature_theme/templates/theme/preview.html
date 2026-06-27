@@ -1,0 +1,31 @@
+{% extends "public_base.html" %}
+
+{% block title %}Theme preview — {{ SPLENT_APP }}{% endblock %}
+
+{% block hero %}
+    {{ render_block('hero',
+        eyebrow='Theme engine',
+        title='Public shell preview',
+        subtitle='Design tokens + composable blocks — not “one css and that’s it”.',
+        cta_label='See the tokens',
+        cta_href='#tokens') }}
+{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <div class="card-grid">
+        <article class="card">
+            <h3 class="card__title">Design tokens</h3>
+            <p class="card__text">Brand colours and fonts are CSS variables set per product. Reskin = change tokens.</p>
+        </article>
+        <article class="card">
+            <h3 class="card__title">Composable blocks</h3>
+            <p class="card__text">Hero, card-grid, carousel, logo-wall… shared partials injected via layout hooks.</p>
+        </article>
+        <article class="card">
+            <h3 class="card__title">Dual shell</h3>
+            <p class="card__text">This public shell, plus a wp-admin-style admin shell for the private CRUD side.</p>
+        </article>
+    </div>
+</div>
+{% endblock %}
