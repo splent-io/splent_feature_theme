@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="{{ theme_tokens.font_url }}">
     {% endif %}
     <style id="brand-tokens">{{ theme_tokens_css | safe }}</style>
-    <link rel="stylesheet" href="{{ url_for('theme.assets', subfolder='css', filename='public.css') }}">
+    {# Feature stylesheets, declared via register_asset(); emitted in a
+       deterministic, deduplicated order (theme base ~0, features ~100, skins ~200). #}
+    {% for href in get_assets('css') %}<link rel="stylesheet" href="{{ href }}">
+    {% endfor %}
 
     {% block head %}{% endblock %}
     {% for hook in get_template_hooks("layout.head") %}{{ hook() | safe }}{% endfor %}
@@ -62,6 +65,9 @@
         <div class="container site-footer__legal">© {{ site.name }}</div>
     </footer>
 
+    {# Feature scripts, declared via register_asset(); deferred, deduped, ordered. #}
+    {% for href in get_assets('js') %}<script src="{{ href }}" defer></script>
+    {% endfor %}
     {% for hook in get_template_hooks("layout.scripts") %}{{ hook() | safe }}{% endfor %}
     {% block scripts %}{% endblock %}
 

@@ -5,7 +5,14 @@ theme_bp = create_blueprint(__name__)
 
 
 def init_feature(app):
-    pass
+    # The theme's base stylesheet loads first (order 0) so feature and skin
+    # assets cascade on top of it. Declared through the asset registry like
+    # every other feature — no hardcoded <link> in the shell.
+    from splent_framework.assets.asset_registry import register_asset
+
+    register_asset(
+        "css", "theme.assets", order=0, subfolder="css", filename="public.css"
+    )
 
 
 def _make_render_block():
