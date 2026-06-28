@@ -34,7 +34,10 @@
                 {% if site.logo and brand_mode in ('logo', 'both') %}<img class="site-brand__logo" src="{{ url_for('static', filename=site.logo) }}" alt="{{ site.name }}" style="height:{{ logo_size }}px;width:auto">{% endif %}
                 {% if brand_mode in ('text', 'both') %}<span class="site-brand__name">{{ site.name }}</span>{% endif %}
             </a>
-            <nav class="site-nav" aria-label="{{ _('Main navigation') }}">
+            <button class="site-nav-toggle" type="button" aria-label="{{ _('Menu') }}" aria-expanded="false" aria-controls="site-nav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" id="site-nav" aria-label="{{ _('Main navigation') }}">
                 {% for item in site.nav %}{% set h = item.href.rstrip('/') %}{% set on = (request.path == h) or (h == '' and request.path == '/') or (h != '' and request.path.startswith(h + '/')) %}<a href="{{ item.href }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
                 {% for hook in get_template_hooks("layout.nav") %}{{ hook() | safe }}{% endfor %}
                 {% if site.locales and site.locales | length > 1 %}
@@ -64,13 +67,32 @@
                 {% for hook in get_template_hooks("layout.footer") %}{{ hook() | safe }}{% endfor %}
             </ul>
         </div>
-        <div class="container site-footer__legal">© {{ site.name }}</div>
+        <div class="container site-footer__legal">
+            <span>© {{ site.name }}</span>
+            <span class="site-footer__madewith">{{ _('Made with') }} <a href="https://splent.io" target="_blank" rel="noopener">SPLENT</a></span>
+        </div>
     </footer>
 
     {# Feature scripts, declared via register_asset(); deferred, deduped, ordered. #}
     {% for href in get_assets('js') %}<script src="{{ href }}" defer></script>
     {% endfor %}
     {% for hook in get_template_hooks("layout.scripts") %}{{ hook() | safe }}{% endfor %}
+    <script>
+        /* Mobile nav: toggle the hamburger menu (and close on outside click). */
+        document.addEventListener("click", function (e) {
+            var nav = document.getElementById("site-nav");
+            if (!nav) return;
+            var toggle = e.target.closest(".site-nav-toggle");
+            if (toggle) {
+                var open = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", open ? "true" : "false");
+            } else if (nav.classList.contains("is-open") && !e.target.closest(".site-nav")) {
+                nav.classList.remove("is-open");
+                var t = document.querySelector(".site-nav-toggle");
+                if (t) t.setAttribute("aria-expanded", "false");
+            }
+        });
+    </script>
     {% block scripts %}{% endblock %}
 
 </body>

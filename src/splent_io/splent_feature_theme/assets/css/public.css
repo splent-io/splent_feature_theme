@@ -52,6 +52,7 @@ a:hover { text-decoration: underline; }
     align-items: center;
     justify-content: space-between;
     min-height: 64px;
+    padding-block: 1rem;
 }
 .site-brand {
     display: flex;
@@ -69,6 +70,49 @@ a:hover { text-decoration: underline; }
 /* Active page (and its sub-views). 3 classes so it beats the skins' 2-class
    `.cms-public .site-nav a`; token-driven, works for both products. */
 .cms-public .site-nav a.is-active { color: var(--brand-primary); font-weight: 700; }
+
+/* ── Mobile nav: hamburger toggle ───────────────────────────────────────── */
+.site-nav-toggle { display: none; }
+
+@media (max-width: 820px) {
+    .site-header__inner { position: relative; flex-wrap: wrap; }
+    .site-nav-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        padding: 9px;
+        background: none;
+        border: 1px solid var(--brand-border);
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .site-nav-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--brand-heading);
+        border-radius: 2px;
+    }
+    .site-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 0;
+        padding: 1rem 1.25rem 1.25rem;
+        background: var(--brand-bg);
+        border-bottom: 1px solid var(--brand-border);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .1);
+    }
+    .site-nav.is-open { display: flex; }
+}
 .lang-switch { display: inline-flex; gap: .25rem; margin-left: .35rem; }
 .lang-switch__opt { font-size: .78rem; font-weight: 700; padding: .15rem .4rem; border-radius: 6px; color: var(--brand-muted); }
 .lang-switch__opt.is-active { color: var(--brand-primary); background: color-mix(in srgb, var(--brand-primary) 12%, transparent); }
@@ -174,7 +218,9 @@ a:hover { text-decoration: underline; }
 .site-social { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; padding: 0; margin: 0; }
 .site-social a { color: var(--brand-text); font-weight: 600; font-size: .9rem; }
 .site-social a:hover { color: var(--brand-primary); text-decoration: none; }
-.site-footer__legal { color: var(--brand-muted); margin: 1.25rem 0 0; font-size: .85rem; }
+.site-footer__legal { color: var(--brand-muted); margin: 1.25rem 0 0; font-size: .85rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.site-footer__madewith a { color: var(--brand-primary); font-weight: 700; }
+.site-footer__madewith a:hover { text-decoration: underline; }
 
 /* ── Home / landing components ──────────────────────────────────────────── */
 .hero-actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
