@@ -1,3 +1,5 @@
+import json
+
 from flask import (
     current_app,
     flash,
@@ -61,3 +63,27 @@ def admin_appearance():
         return redirect(url_for("theme.admin_appearance"))
 
     return render_template("theme/admin/appearance.html")
+
+
+@theme_bp.route("/admin/menus", methods=["GET", "POST"])
+@login_required
+def admin_menus():
+    """The Menus editor — composes the main nav from INSTALLED features.
+
+    SPL: the rows come from the features that registered a nav entry (so the
+    menu tracks the product's derivation); the admin only reorders / hides /
+    relabels them and may add custom external links. The override is stored
+    under the ``site_nav`` setting and reconciled with the feature entries at
+    render time.
+    """
+    from splent_io.splent_feature_theme.nav import editor_rows, parse_override
+
+    if request.method == "POST":
+        override = parse_override(request.form)
+        service_proxy("SettingsService").set(
+            "site_nav", json.dumps(override, ensure_ascii=False)
+        )
+        flash("Menu updated.", "success")
+        return redirect(url_for("theme.admin_menus"))
+
+    return render_template("theme/admin/menus.html", rows=editor_rows(current_app))

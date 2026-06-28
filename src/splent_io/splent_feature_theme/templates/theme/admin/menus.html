@@ -1,0 +1,135 @@
+{% extends "base_template.html" %}
+
+{% block title %}Menus{% endblock %}
+
+{% block content %}
+<style>
+  .nav-row--hidden { opacity: .55; }
+  #nav-rows { list-style: none; padding-left: 0; }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h1 class="h3 mb-0">Menus</h1>
+</div>
+<p class="text-muted">
+    The main navigation is composed from the <strong>installed features</strong> —
+    each content feature contributes its page. Reorder, rename or hide them, and
+    add custom external links. Changes apply immediately.
+</p>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }} py-2">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+<form method="POST">
+    <ul id="nav-rows">
+        {% for row in rows %}
+        {% if row.type == 'custom' %}
+        <li class="nav-row card mb-2 {{ 'nav-row--hidden' if not row.visible }}" data-type="custom">
+            <div class="card-body d-flex align-items-center gap-2 py-2">
+                <input type="hidden" name="row_type" value="custom">
+                <input type="hidden" name="row_key" value="">
+                <input type="hidden" name="row_visible" class="row-visible" value="{{ '1' if row.visible else '0' }}">
+                <span class="badge bg-info-subtle text-info-emphasis border">custom</span>
+                <input name="row_label" class="form-control form-control-sm" style="max-width:240px" value="{{ row.label }}" placeholder="Label">
+                <input name="row_href" class="form-control form-control-sm" value="{{ row.href }}" placeholder="https://…">
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="Move up">↑</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">{{ 'Hide' if row.visible else 'Show' }}</button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+            </div>
+        </li>
+        {% else %}
+        <li class="nav-row card mb-2 {{ 'nav-row--hidden' if not row.visible }}" data-type="feature">
+            <div class="card-body d-flex align-items-center gap-2 py-2">
+                <input type="hidden" name="row_type" value="feature">
+                <input type="hidden" name="row_key" value="{{ row.key }}">
+                <input type="hidden" name="row_href" value="{{ row.href }}">
+                <input type="hidden" name="row_visible" class="row-visible" value="{{ '1' if row.visible else '0' }}">
+                {% if row.missing %}
+                <span class="badge bg-danger-subtle text-danger-emphasis border" title="This feature is no longer installed">not installed</span>
+                {% else %}
+                <span class="badge bg-light text-muted border">feature</span>
+                {% endif %}
+                <div class="flex-grow-1">
+                    <input name="row_label" class="form-control form-control-sm" style="max-width:240px" value="{{ row.label }}" placeholder="{{ row.default_label }}">
+                    <small class="text-muted">{% if row.href %}→ {{ row.href }}{% else %}(unavailable){% endif %}</small>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="Move up">↑</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">{{ 'Hide' if row.visible else 'Show' }}</button>
+                {% if row.missing %}
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+                {% endif %}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <button type="button" id="add-custom" class="btn btn-outline-primary btn-sm">+ Add custom link</button>
+        <button type="submit" class="btn btn-primary">Save menu</button>
+    </div>
+</form>
+
+<template id="custom-row-tpl">
+    <li class="nav-row card mb-2" data-type="custom">
+        <div class="card-body d-flex align-items-center gap-2 py-2">
+            <input type="hidden" name="row_type" value="custom">
+            <input type="hidden" name="row_key" value="">
+            <input type="hidden" name="row_visible" class="row-visible" value="1">
+            <span class="badge bg-info-subtle text-info-emphasis border">custom</span>
+            <input name="row_label" class="form-control form-control-sm" style="max-width:240px" value="" placeholder="Label">
+            <input name="row_href" class="form-control form-control-sm" value="" placeholder="https://…">
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="Move up">↑</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">Hide</button>
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+        </div>
+    </li>
+</template>
+
+<script>
+(function () {
+    var list = document.getElementById('nav-rows');
+    var tpl = document.getElementById('custom-row-tpl');
+
+    function paintVisible(row) {
+        var hid = row.querySelector('.row-visible');
+        var on = hid.value === '1';
+        row.classList.toggle('nav-row--hidden', !on);
+        var btn = row.querySelector('.btn-toggle');
+        if (btn) btn.textContent = on ? 'Hide' : 'Show';
+    }
+
+    list.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var row = e.target.closest('.nav-row');
+        if (!row) return;
+        if (btn.classList.contains('btn-up') && row.previousElementSibling) {
+            list.insertBefore(row, row.previousElementSibling);
+        } else if (btn.classList.contains('btn-down') && row.nextElementSibling) {
+            list.insertBefore(row.nextElementSibling, row);
+        } else if (btn.classList.contains('btn-toggle')) {
+            var hid = row.querySelector('.row-visible');
+            hid.value = hid.value === '1' ? '0' : '1';
+            paintVisible(row);
+        } else if (btn.classList.contains('btn-remove')) {
+            row.remove();
+        }
+    });
+
+    document.getElementById('add-custom').addEventListener('click', function () {
+        // Clone a static template node — never build DOM from user-entered values.
+        var node = tpl.content.firstElementChild.cloneNode(true);
+        list.appendChild(node);
+    });
+
+    Array.prototype.forEach.call(list.querySelectorAll('.nav-row'), paintVisible);
+})();
+</script>
+{% endblock %}

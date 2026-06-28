@@ -49,13 +49,13 @@ def inject_context_vars(app):
             return default
 
     tokens = get_tokens(app)
-    # Translate nav labels so the menu follows the active locale. The labels
-    # live in product config (SITE_NAV); their translations come from the
-    # content features' catalogs (e.g. "Projects" -> "Proyectos").
-    nav = [
-        {**item, "label": _translate(item["label"])} if item.get("label") else item
-        for item in app.config.get("SITE_NAV", [])
-    ]
+    # Compose the main nav from the INSTALLED features (each declares its entry
+    # via register_nav_item) reconciled with the admin Menus editor's runtime
+    # override (order / visibility / label + custom links). Falls back to legacy
+    # SITE_NAV. Labels are translated to follow the active locale.
+    from splent_io.splent_feature_theme.nav import compose_nav
+
+    nav = compose_nav(app, _translate)
     site = {
         "name": _s("site_name", app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site"),
         "tagline": _s("site_tagline", app.config.get("SITE_TAGLINE", "")),

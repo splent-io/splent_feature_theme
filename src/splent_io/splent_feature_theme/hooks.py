@@ -40,4 +40,22 @@ def appearance_admin_link():
     )
 
 
+def menus_admin_link():
+    """Sidebar entry for the Menus editor (composes the nav from features)."""
+    active = (
+        "active"
+        if request.endpoint and request.endpoint == "theme.admin_menus"
+        else ""
+    )
+    return (
+        f'<li class="sidebar-item {active}">'
+        f'<a class="sidebar-link" href="{url_for("theme.admin_menus")}">'
+        '<i class="align-middle" data-feather="menu"></i> '
+        '<span class="align-middle">Menus</span>'
+        "</a>"
+        "</li>"
+    )
+
+
 register_template_hook("layout.authenticated_sidebar", appearance_admin_link)
+register_template_hook("layout.authenticated_sidebar", menus_admin_link)
