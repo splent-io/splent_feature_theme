@@ -66,6 +66,9 @@ a:hover { text-decoration: underline; }
 .site-nav { display: flex; gap: 1.25rem; align-items: center; }
 .site-nav a { color: var(--brand-text); font-weight: 500; }
 .site-nav a:hover { color: var(--brand-primary); text-decoration: none; }
+/* Active page (and its sub-views). 3 classes so it beats the skins' 2-class
+   `.cms-public .site-nav a`; token-driven, works for both products. */
+.cms-public .site-nav a.is-active { color: var(--brand-primary); font-weight: 700; }
 .lang-switch { display: inline-flex; gap: .25rem; margin-left: .35rem; }
 .lang-switch__opt { font-size: .78rem; font-weight: 700; padding: .15rem .4rem; border-radius: 6px; color: var(--brand-muted); }
 .lang-switch__opt.is-active { color: var(--brand-primary); background: color-mix(in srgb, var(--brand-primary) 12%, transparent); }

@@ -35,7 +35,7 @@
                 {% if brand_mode in ('text', 'both') %}<span class="site-brand__name">{{ site.name }}</span>{% endif %}
             </a>
             <nav class="site-nav" aria-label="{{ _('Main navigation') }}">
-                {% for item in site.nav %}<a href="{{ item.href }}">{{ item.label }}</a>{% endfor %}
+                {% for item in site.nav %}{% set h = item.href.rstrip('/') %}{% set on = (request.path == h) or (h == '' and request.path == '/') or (h != '' and request.path.startswith(h + '/')) %}<a href="{{ item.href }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
                 {% for hook in get_template_hooks("layout.nav") %}{{ hook() | safe }}{% endfor %}
                 {% if site.locales and site.locales | length > 1 %}
                 <span class="lang-switch">
