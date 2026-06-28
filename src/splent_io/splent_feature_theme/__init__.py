@@ -32,11 +32,24 @@ def inject_context_vars(app):
     """
     import os
 
+    try:
+        from flask_babel import gettext as _translate
+    except Exception:
+        def _translate(s):
+            return s
+
     tokens = get_tokens(app)
+    # Translate nav labels so the menu follows the active locale. The labels
+    # live in product config (SITE_NAV); their translations come from the
+    # content features' catalogs (e.g. "Projects" -> "Proyectos").
+    nav = [
+        {**item, "label": _translate(item["label"])} if item.get("label") else item
+        for item in app.config.get("SITE_NAV", [])
+    ]
     site = {
         "name": app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site",
         "tagline": app.config.get("SITE_TAGLINE", ""),
-        "nav": app.config.get("SITE_NAV", []),
+        "nav": nav,
         "social": app.config.get("SITE_SOCIAL", []),
         "event": app.config.get("SITE_EVENT", {}),
         "sponsors": app.config.get("SITE_SPONSORS", []),
