@@ -21,6 +21,8 @@
 
 <body class="cms-public">
 
+    {% for hook in get_template_hooks("layout.body_start") %}{{ hook() | safe }}{% endfor %}
+
     <header class="site-header">
         <div class="container site-header__inner">
             <a class="site-brand" href="/">
