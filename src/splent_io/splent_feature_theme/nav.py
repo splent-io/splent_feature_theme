@@ -58,7 +58,9 @@ def compose_nav(app, translate):
                 continue
             if entry.get("type") == "custom":
                 label = (entry.get("label") or "").strip()
-                href = _safe_href(entry.get("href"))  # block javascript:/data: at render too
+                href = _safe_href(
+                    entry.get("href")
+                )  # block javascript:/data: at render too
                 if label and href and entry.get("visible", True):
                     nav.append({"label": translate(label), "href": href})
                 continue
@@ -105,42 +107,48 @@ def editor_rows(app):
             if not isinstance(entry, dict):
                 continue
             if entry.get("type") == "custom":
-                rows.append({
-                    "type": "custom",
-                    "key": "",
-                    "label": (entry.get("label") or "").strip(),
-                    "href": (entry.get("href") or "").strip(),
-                    "default_label": "",
-                    "visible": bool(entry.get("visible", True)),
-                    "missing": False,
-                })
+                rows.append(
+                    {
+                        "type": "custom",
+                        "key": "",
+                        "label": (entry.get("label") or "").strip(),
+                        "href": (entry.get("href") or "").strip(),
+                        "default_label": "",
+                        "visible": bool(entry.get("visible", True)),
+                        "missing": False,
+                    }
+                )
                 continue
             key = entry.get("key")
             if key in seen:
                 continue  # duplicate key in the override -> one row
             item = by_key.get(key)
             seen.add(key)
-            rows.append({
-                "type": "feature",
-                "key": key,
-                "label": (entry.get("label") or "").strip(),
-                "href": item["href"] if item else "",
-                "default_label": item["label"] if item else key,
-                "visible": bool(entry.get("visible", True)),
-                "missing": item is None,
-            })
+            rows.append(
+                {
+                    "type": "feature",
+                    "key": key,
+                    "label": (entry.get("label") or "").strip(),
+                    "href": item["href"] if item else "",
+                    "default_label": item["label"] if item else key,
+                    "visible": bool(entry.get("visible", True)),
+                    "missing": item is None,
+                }
+            )
 
     for item in base:  # feature entries not represented in the override yet
         if item["key"] not in seen:
-            rows.append({
-                "type": "feature",
-                "key": item["key"],
-                "label": "",
-                "href": item["href"],
-                "default_label": item["label"],
-                "visible": True,
-                "missing": False,
-            })
+            rows.append(
+                {
+                    "type": "feature",
+                    "key": item["key"],
+                    "label": "",
+                    "href": item["href"],
+                    "default_label": item["label"],
+                    "visible": True,
+                    "missing": False,
+                }
+            )
     return rows
 
 
@@ -148,7 +156,9 @@ def _safe_href(href):
     """Allow only safe link targets for custom links — block javascript:/data:."""
     href = (href or "").strip()
     low = href.lower()
-    if low.startswith(("http://", "https://", "mailto:")) or href.startswith(("/", "#")):
+    if low.startswith(("http://", "https://", "mailto:")) or href.startswith(
+        ("/", "#")
+    ):
         return href
     return ""
 
@@ -175,12 +185,14 @@ def parse_override(form):
         if t == "custom":
             href = _safe_href(at(hrefs, i))
             if label and href:
-                out.append({
-                    "type": "custom",
-                    "label": label,
-                    "href": href,
-                    "visible": at(visibles, i) == "1",
-                })
+                out.append(
+                    {
+                        "type": "custom",
+                        "label": label,
+                        "href": href,
+                        "visible": at(visibles, i) == "1",
+                    }
+                )
         else:
             key = at(keys, i).strip()
             if not key:

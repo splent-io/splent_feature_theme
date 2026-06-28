@@ -43,9 +43,7 @@ def appearance_admin_link():
 def menus_admin_link():
     """Sidebar entry for the Menus editor (composes the nav from features)."""
     active = (
-        "active"
-        if request.endpoint and request.endpoint == "theme.admin_menus"
-        else ""
+        "active" if request.endpoint and request.endpoint == "theme.admin_menus" else ""
     )
     return (
         f'<li class="sidebar-item {active}">'

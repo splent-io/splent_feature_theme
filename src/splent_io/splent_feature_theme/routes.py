@@ -57,9 +57,7 @@ def admin_appearance():
     changes apply immediately on the next render.
     """
     if request.method == "POST":
-        values = {
-            field: request.form.get(field, "") for field in APPEARANCE_FIELDS
-        }
+        values = {field: request.form.get(field, "") for field in APPEARANCE_FIELDS}
         service_proxy("SettingsService").set_many(values)
         flash("Appearance updated.", "success")
         return redirect(url_for("theme.admin_appearance"))

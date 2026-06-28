@@ -42,6 +42,7 @@ def inject_context_vars(app):
     try:
         from flask_babel import gettext as _translate
     except Exception:
+
         def _translate(s):
             return s
 
@@ -64,7 +65,10 @@ def inject_context_vars(app):
 
     nav = compose_nav(app, _translate)
     site = {
-        "name": _s("site_name", app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site"),
+        "name": _s(
+            "site_name",
+            app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site",
+        ),
         "tagline": _s("site_tagline", app.config.get("SITE_TAGLINE", "")),
         "nav": nav,
         "social": app.config.get("SITE_SOCIAL", []),
@@ -82,7 +86,10 @@ def inject_context_vars(app):
     }
     try:
         from flask_babel import get_locale as _get_locale
-        site["locale"] = str(_get_locale() or app.config.get("BABEL_DEFAULT_LOCALE", "en"))
+
+        site["locale"] = str(
+            _get_locale() or app.config.get("BABEL_DEFAULT_LOCALE", "en")
+        )
     except Exception:
         site["locale"] = app.config.get("BABEL_DEFAULT_LOCALE", "en")
     site["locales"] = app.config.get("BABEL_SUPPORTED_LOCALES", ["en"])
