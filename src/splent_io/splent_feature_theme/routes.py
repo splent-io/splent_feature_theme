@@ -1,6 +1,29 @@
-from flask import current_app, redirect, render_template, request, session
+from flask import (
+    current_app,
+    flash,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
+from flask_login import login_required
 
 from splent_io.splent_feature_theme import theme_bp
+from splent_framework.services.service_locator import service_proxy
+
+# Setting keys edited by the Appearance editor (the Customizer analogue).
+APPEARANCE_FIELDS = [
+    "site_name",
+    "site_tagline",
+    "site_logo",
+    "brand_primary",
+    "brand_accent",
+    "brand_bg",
+    "brand_surface",
+    "brand_text",
+    "brand_heading",
+]
 
 
 @theme_bp.route("/theme/preview", methods=["GET"])
@@ -18,3 +41,23 @@ def set_language(code):
     if code in supported:
         session["locale"] = code
     return redirect(request.referrer or "/")
+
+
+@theme_bp.route("/admin/appearance", methods=["GET", "POST"])
+@login_required
+def admin_appearance():
+    """The Appearance editor — the WordPress Customizer analogue.
+
+    Edits the site identity (name/tagline/logo) and the brand color tokens,
+    persisting them via SettingsService. The theme reads these keys back, so
+    changes apply immediately on the next render.
+    """
+    if request.method == "POST":
+        values = {
+            field: request.form.get(field, "") for field in APPEARANCE_FIELDS
+        }
+        service_proxy("SettingsService").set_many(values)
+        flash("Appearance updated.", "success")
+        return redirect(url_for("theme.admin_appearance"))
+
+    return render_template("theme/admin/appearance.html")

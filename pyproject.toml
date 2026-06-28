@@ -41,7 +41,7 @@ commands = []
 
 [tool.splent.contract.requires]
 # Other SPLENT features this feature depends on (e.g. ["auth", "mail"])
-features = []
+features = ["settings"]
 # Environment variables this feature expects to be set
 env_vars = []
 

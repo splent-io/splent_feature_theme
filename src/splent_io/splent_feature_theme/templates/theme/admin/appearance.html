@@ -1,0 +1,77 @@
+{% extends "base_template.html" %}
+
+{% block title %}Appearance{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Appearance</h1>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }} py-2">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+<form method="POST">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Site</h2>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="site_name">Site name</label>
+                    <input name="site_name" id="site_name" class="form-control" value="{{ setting('site_name', '') }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="site_tagline">Tagline</label>
+                    <input name="site_tagline" id="site_tagline" class="form-control" value="{{ setting('site_tagline', '') }}">
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="site_logo">Logo URL</label>
+                    <input name="site_logo" id="site_logo" class="form-control" value="{{ setting('site_logo', '') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Colors</h2>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_primary">Primary</label>
+                    <input type="color" name="brand_primary" id="brand_primary" class="form-control form-control-color" value="{{ setting('brand_primary', theme_tokens['primary']) }}">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_accent">Accent</label>
+                    <input type="color" name="brand_accent" id="brand_accent" class="form-control form-control-color" value="{{ setting('brand_accent', theme_tokens['accent']) }}">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_bg">Background</label>
+                    <input type="color" name="brand_bg" id="brand_bg" class="form-control form-control-color" value="{{ setting('brand_bg', theme_tokens['bg']) }}">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_surface">Surface</label>
+                    <input type="color" name="brand_surface" id="brand_surface" class="form-control form-control-color" value="{{ setting('brand_surface', theme_tokens['surface']) }}">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_text">Text</label>
+                    <input type="color" name="brand_text" id="brand_text" class="form-control form-control-color" value="{{ setting('brand_text', theme_tokens['text']) }}">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <label class="form-label" for="brand_heading">Heading</label>
+                    <input type="color" name="brand_heading" id="brand_heading" class="form-control form-control-color" value="{{ setting('brand_heading', theme_tokens['heading']) }}">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <span class="text-muted small">Changes apply immediately.</span>
+            <button class="btn btn-primary" type="submit">Save changes</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

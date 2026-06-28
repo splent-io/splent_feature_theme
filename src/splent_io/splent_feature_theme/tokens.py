@@ -44,10 +44,25 @@ _CSS_VAR = {
 
 
 def get_tokens(app) -> dict:
-    """Merge product/skin overrides (``app.config['THEME_TOKENS']``) over defaults."""
+    """Merge runtime settings over product/skin overrides over defaults.
+
+    Order (highest wins): admin Appearance settings (``brand_*``) >
+    ``app.config['THEME_TOKENS']`` (product/skin) > DEFAULT_TOKENS.
+    """
     tokens = dict(DEFAULT_TOKENS)
     overrides = (app.config.get("THEME_TOKENS") if app is not None else None) or {}
     tokens.update({k: v for k, v in overrides.items() if v is not None})
+    # Runtime overrides from the settings store (admin-editable Appearance).
+    try:
+        from splent_framework.services.service_locator import service_proxy
+
+        svc = service_proxy("SettingsService")
+        for tk in ("primary", "accent", "bg", "surface", "text", "heading"):
+            v = svc.get(f"brand_{tk}", None)
+            if v:
+                tokens[tk] = v
+    except Exception:
+        pass
     return tokens
 
 

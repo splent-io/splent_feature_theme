@@ -38,6 +38,16 @@ def inject_context_vars(app):
         def _translate(s):
             return s
 
+    from splent_framework.services.service_locator import service_proxy
+
+    def _s(key, default):
+        # runtime setting (admin Appearance editor) -> product config -> default
+        try:
+            v = service_proxy("SettingsService").get(key, None)
+            return v if v not in (None, "") else default
+        except Exception:
+            return default
+
     tokens = get_tokens(app)
     # Translate nav labels so the menu follows the active locale. The labels
     # live in product config (SITE_NAV); their translations come from the
@@ -47,13 +57,13 @@ def inject_context_vars(app):
         for item in app.config.get("SITE_NAV", [])
     ]
     site = {
-        "name": app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site",
-        "tagline": app.config.get("SITE_TAGLINE", ""),
+        "name": _s("site_name", app.config.get("SITE_NAME") or os.getenv("SPLENT_APP") or "Site"),
+        "tagline": _s("site_tagline", app.config.get("SITE_TAGLINE", "")),
         "nav": nav,
         "social": app.config.get("SITE_SOCIAL", []),
         "event": app.config.get("SITE_EVENT", {}),
         "sponsors": app.config.get("SITE_SPONSORS", []),
-        "logo": app.config.get("SITE_LOGO", ""),
+        "logo": _s("site_logo", app.config.get("SITE_LOGO", "")),
         "gallery": app.config.get("SITE_GALLERY", []),
         "hero_eyebrow": app.config.get("SITE_HERO_EYEBROW", ""),
         "hero_actions": app.config.get("SITE_HERO_ACTIONS", []),
