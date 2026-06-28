@@ -32,6 +32,20 @@
                     <label class="form-label" for="site_logo">Logo URL</label>
                     <input name="site_logo" id="site_logo" class="form-control" value="{{ setting('site_logo', '') }}">
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="site_brand_mode">Header brand</label>
+                    {% set bm = setting('site_brand_mode', 'both') %}
+                    <select name="site_brand_mode" id="site_brand_mode" class="form-select">
+                        <option value="both" {{ 'selected' if bm == 'both' }}>Logo + text</option>
+                        <option value="logo" {{ 'selected' if bm == 'logo' }}>Logo only</option>
+                        <option value="text" {{ 'selected' if bm == 'text' }}>Text only</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="site_logo_size">Logo height (px)</label>
+                    <input type="number" name="site_logo_size" id="site_logo_size" class="form-control"
+                           value="{{ setting('site_logo_size', '40') }}" min="16" max="200">
+                </div>
             </div>
         </div>
     </div>

@@ -28,9 +28,11 @@
 
     <header class="site-header">
         <div class="container site-header__inner">
+            {% set brand_mode = setting('site_brand_mode', 'both') %}
+            {% set logo_size = setting('site_logo_size', '40') %}
             <a class="site-brand" href="/">
-                {% if site.logo %}<img class="site-brand__logo" src="{{ url_for('static', filename=site.logo) }}" alt="{{ site.name }}">{% endif %}
-                <span class="site-brand__name">{{ site.name }}</span>
+                {% if site.logo and brand_mode in ('logo', 'both') %}<img class="site-brand__logo" src="{{ url_for('static', filename=site.logo) }}" alt="{{ site.name }}" style="height:{{ logo_size }}px;width:auto">{% endif %}
+                {% if brand_mode in ('text', 'both') %}<span class="site-brand__name">{{ site.name }}</span>{% endif %}
             </a>
             <nav class="site-nav" aria-label="{{ _('Main navigation') }}">
                 {% for item in site.nav %}<a href="{{ item.href }}">{{ item.label }}</a>{% endfor %}

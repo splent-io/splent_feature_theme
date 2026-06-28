@@ -19,6 +19,8 @@ APPEARANCE_FIELDS = [
     "site_name",
     "site_tagline",
     "site_logo",
+    "site_brand_mode",
+    "site_logo_size",
     "brand_primary",
     "brand_accent",
     "brand_bg",

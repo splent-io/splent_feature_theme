@@ -38,7 +38,7 @@
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="Move up">↑</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">{{ 'Hide' if row.visible else 'Show' }}</button>
-                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
             </div>
         </li>
         {% else %}
@@ -61,7 +61,7 @@
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">{{ 'Hide' if row.visible else 'Show' }}</button>
                 {% if row.missing %}
-                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
                 {% endif %}
             </div>
         </li>
@@ -87,7 +87,7 @@
             <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="Move up">↑</button>
             <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="Move down">↓</button>
             <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="Show/hide">Hide</button>
-            <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove">✕</button>
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
     </li>
 </template>
