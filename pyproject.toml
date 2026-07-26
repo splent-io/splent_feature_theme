@@ -28,7 +28,7 @@ cli_version = "1.11.0"
 # Preserved across refreshes: description, category, tags, env, and
 # requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
-description = "Theme engine: public shell (dual-shell), design tokens and composable blocks"
+description = "Theme engine with the dual-shell public layout, design tokens and composable blocks"
 archetype = "light"
 
 [tool.splent.contract.provides]
