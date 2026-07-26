@@ -25,8 +25,11 @@ cli_version = "1.11.0"
 
 # ── Feature Contract (auto-generated) ────────────────────────────────────────
 # Do not edit manually — re-run `splent feature:contract --write` to refresh.
+# Preserved across refreshes: description, category, tags, env, and
+# requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
 description = "Theme engine: public shell (dual-shell), design tokens and composable blocks"
+archetype = "light"
 
 [tool.splent.contract.provides]
 routes     = ["/admin/appearance", "/admin/menus", "/lang/<code>", "/theme/preview"]
@@ -40,7 +43,7 @@ translations = ["es"]
 docker     = []
 
 [tool.splent.contract.requires]
-features = []
+features = ["settings"]
 env_vars = ["SPLENT_APP"]
 signals  = []
 
