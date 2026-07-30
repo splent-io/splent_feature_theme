@@ -14,6 +14,32 @@ The theme registers nothing into the public slots by default — products and
 content features compose the page. Skins refine the theme by overriding tokens
 (THEME_TOKENS) and, if needed, block templates via [tool.splent.refinement].
 
+Breadcrumbs are not a hook. The shell renders one under the header for every
+page whose template context carries a `breadcrumb` variable, and renders no
+markup at all for the pages that do not, so a feature passes a list and
+imports nothing:
+
+    return render_template(
+        "courses/page.html",
+        breadcrumb=[
+            {"label": _("Courses"), "url": url_for("courses.index")},
+            {"label": course.name, "url": course_url(course)},
+            {"label": page.name, "url": None},
+        ],
+        ...,
+    )
+
+Each entry is a plain dict with a `label` and a `url` that may be None, in
+reading order from the root down. The last entry is where the reader is: it is
+rendered as text with aria-current, never as a link, whatever url it carries.
+An intermediate entry with no url is a level that has no page of its own and
+is rendered as text too.
+
+What the feature gets back is blocks/breadcrumb.html: a nav with a translated
+accessible name, an ordered list, separators drawn in CSS so a screen reader
+does not read them out, truncation instead of a trail that wraps onto three
+lines, and the colours of whichever skin the product installed.
+
 In the admin shell, the theme contributes the "Appearance" editor (the
 WordPress Customizer analogue) to the authenticated sidebar.
 """

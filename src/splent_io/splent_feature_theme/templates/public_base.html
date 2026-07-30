@@ -49,6 +49,11 @@
         </div>
     </header>
 
+    {# Any page can hand the shell a trail of {label, url} entries as
+       `breadcrumb`; pages that do not get no markup at all. See
+       blocks/breadcrumb.html and the module docstring of hooks.py. #}
+    {% if breadcrumb %}{{ render_block('breadcrumb', breadcrumb=breadcrumb) }}{% endif %}
+
     {% for hook in get_template_hooks("layout.hero") %}{{ hook() | safe }}{% endfor %}
     {% block hero %}{% endblock %}
 

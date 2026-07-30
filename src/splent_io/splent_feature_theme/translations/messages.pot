@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-28 10:00+0000\n"
+"POT-Creation-Date: 2026-07-30 15:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:32
+#: src/splent_io/splent_feature_theme/templates/public_base.html:37
+msgid "Menu"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:40
 msgid "Main navigation"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:77
+msgid "Made with"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/blocks/breadcrumb.html:13
+msgid "Breadcrumb"
 msgstr ""
 

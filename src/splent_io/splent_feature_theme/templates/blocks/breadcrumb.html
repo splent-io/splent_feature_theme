@@ -1,0 +1,30 @@
+{# Composable breadcrumb block. The shell renders it for every page whose
+   context carries a `breadcrumb` list, so a feature only passes data:
+
+   {{ render_block('breadcrumb', breadcrumb=[
+          {'label': 'Courses', 'url': '/courses'},
+          {'label': 'EGC', 'url': '/courses/egc'},
+          {'label': 'Tema 1', 'url': None}]) }}
+
+   The last entry is where the reader is, so it is text and not a link even
+   when it carries a url. The separators are drawn by CSS: a "/" written here
+   would be read out between every pair of labels. #}
+{%- if breadcrumb %}
+<nav class="block block-breadcrumb" aria-label="{{ _('Breadcrumb') }}">
+    <div class="container">
+        <ol class="breadcrumb-trail">
+            {%- for crumb in breadcrumb %}
+            {%- if loop.last %}
+            <li class="breadcrumb-level"><span class="breadcrumb-current" aria-current="page">{{ crumb.label }}</span></li>
+            {%- elif crumb.url %}
+            <li class="breadcrumb-level"><a class="breadcrumb-link" href="{{ crumb.url }}">{{ crumb.label }}</a></li>
+            {%- else %}
+            {#- A level the reader cannot open, such as a grouping with no page
+                of its own. It is still part of the trail. #}
+            <li class="breadcrumb-level"><span>{{ crumb.label }}</span></li>
+            {%- endif %}
+            {%- endfor %}
+        </ol>
+    </div>
+</nav>
+{%- endif %}
