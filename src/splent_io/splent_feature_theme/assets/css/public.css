@@ -218,7 +218,13 @@ a:hover { text-decoration: underline; }
 .site-social { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; padding: 0; margin: 0; }
 .site-social a { color: var(--brand-text); font-weight: 600; font-size: .9rem; }
 .site-social a:hover { color: var(--brand-primary); text-decoration: none; }
-.site-footer__legal { color: var(--brand-muted); margin: 1.25rem 0 0; font-size: .85rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+/* margin-block-start, not the margin shorthand: this element is also a
+   .container, which centres itself with margin-inline: auto, and the
+   shorthand resets that to zero. The row then hugged the left edge of the
+   window while the row above it stayed centred, so on a wide screen the
+   copyright sat in the far corner and "Made with SPLENT", pushed to the
+   right edge of a box starting at zero, landed in the middle of nowhere. */
+.site-footer__legal { color: var(--brand-muted); margin-block-start: 1.25rem; font-size: .85rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .site-footer__madewith a { color: var(--brand-primary); font-weight: 700; }
 .site-footer__madewith a:hover { text-decoration: underline; }
 
