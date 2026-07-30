@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_theme"
-version = "0.3.1"
+version = "0.4.0"
 readme = "README.md"
 requires-python = ">=3.13"
 
@@ -46,12 +46,12 @@ docker     = []
 
 [tool.splent.contract.requires]
 features = ["settings"]
-env_vars = ["SPLENT_APP"]
+env_vars = ["SITE_NAME", "SITE_TAGLINE", "SPLENT_APP"]
 signals  = []
 
 [tool.splent.contract.extensible]
 services  = []
 templates = ["blocks/breadcrumb.html", "blocks/hero.html", "public_base.html", "theme/admin/appearance.html", "theme/admin/menus.html", "theme/index.html", "theme/preview.html"]
 models    = []
-hooks     = ["layout.authenticated_sidebar", "layout.body_start", "layout.footer", "layout.head", "layout.hero", "layout.nav", "layout.scripts"]
+hooks     = ["layout.authenticated_sidebar", "layout.body_start", "layout.footer", "layout.head", "layout.hero", "layout.nav", "layout.nav.end", "layout.scripts"]
 routes    = false
