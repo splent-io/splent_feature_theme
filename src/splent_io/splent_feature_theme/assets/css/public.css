@@ -386,6 +386,13 @@ a:hover { text-decoration: underline; }
    whitespace inherit, because a block where everything is a different colour
    reads as decoration and stops helping anyone find the line they wanted. */
 .cms-public {
+    /* The panel itself, so a code block is one decision in one place
+       instead of each skin inventing its own and none of them following
+       the reader's colour scheme. */
+    --code-bg:      #f6f7f9;
+    --code-fg:      #24292f;
+    --code-border:  #e2e4e8;
+
     --code-comment: #646b74;
     --code-keyword: #b5187f;
     --code-string:  #1a7f37;
@@ -394,6 +401,27 @@ a:hover { text-decoration: underline; }
     --code-builtin: #0550ae;
     --code-added:   #1a7f37;
     --code-removed: #b31d28;
+}
+
+/* The dark palette. Not the light one dimmed: those hues are chosen to hold
+   4.5:1 against a near-black panel, which the light ones do not, and a
+   reader who set their system to dark and then got a white slab in the
+   middle of a page has been handed a torch. */
+@media (prefers-color-scheme: dark) {
+    .cms-public {
+        --code-bg:      #16181d;
+        --code-fg:      #e3e6eb;
+        --code-border:  #2f333b;
+
+        --code-comment: #7c8797;
+        --code-keyword: #ff7bbf;
+        --code-string:  #8ddb8d;
+        --code-number:  #ffb86c;
+        --code-name:    #c9a6ff;
+        --code-builtin: #79c0ff;
+        --code-added:   #8ddb8d;
+        --code-removed: #ff8080;
+    }
 }
 
 /* Comments: quieter than the code, and italic so a long licence header at the
@@ -442,3 +470,117 @@ a:hover { text-decoration: underline; }
 /* A lexer that could not make sense of a character still shows it. Marking it
    red would tell a reader their own page is broken, which it is not. */
 .cms-public .tok-err { color: inherit; }
+
+
+/* ── The code block itself ──────────────────────────────────────────────────
+   A figure around the <pre>, added by JavaScript at load: the language it is
+   written in, and a button that copies it. Both belong here rather than in
+   the markdown the server renders, because both are about reading a page
+   rather than about what the page says, and a stored body should not carry
+   chrome that a redesign would have to migrate out of it again. */
+
+.cms-public .code-block {
+    position: relative;
+    margin: 1.6rem 0;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: var(--brand-radius);
+    overflow: hidden;
+}
+
+.cms-public .code-block__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .35rem .5rem .35rem .9rem;
+    border-bottom: 1px solid var(--code-border);
+    /* A shade off the panel, so the bar reads as chrome and the code below
+       keeps the whole of the reader's attention. */
+    background: color-mix(in srgb, var(--code-fg) 6%, var(--code-bg));
+}
+
+/* What the block is written in. Taken from the language- class the renderer
+   already puts there, so it says bash because the author wrote bash. */
+.cms-public .code-block__lang {
+    font-family: var(--brand-font-display, ui-monospace, monospace);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--code-fg) 55%, transparent);
+}
+
+.cms-public .code-block__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .2rem .55rem;
+    font: inherit;
+    font-size: .72rem;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--code-fg) 70%, transparent);
+    background: none;
+    border: 1px solid var(--code-border);
+    border-radius: calc(var(--brand-radius) * .6);
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease, background-color .15s ease;
+}
+
+.cms-public .code-block__copy:hover {
+    color: var(--code-fg);
+    border-color: color-mix(in srgb, var(--code-fg) 35%, transparent);
+    background: color-mix(in srgb, var(--code-fg) 8%, transparent);
+}
+
+.cms-public .code-block__copy:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 1px;
+}
+
+/* Said in words as well as in colour, and announced to a screen reader by
+   the script, because "it went green" is not feedback everyone receives. */
+.cms-public .code-block__copy.is-done {
+    color: var(--code-added);
+    border-color: color-mix(in srgb, var(--code-added) 45%, transparent);
+}
+
+.cms-public .code-block pre {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--code-fg);
+    padding: .9rem 1.1rem;
+    overflow-x: auto;
+    tab-size: 4;
+}
+
+/* A block with no language gets no bar, so an unlabelled snippet does not
+   grow an empty strip above it. The copy button moves inside instead. */
+.cms-public .code-block--bare .code-block__bar {
+    position: absolute;
+    inset-block-start: .4rem;
+    inset-inline-end: .4rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    opacity: 0;
+    transition: opacity .15s ease;
+}
+
+.cms-public .code-block--bare:hover .code-block__bar,
+.cms-public .code-block--bare:focus-within .code-block__bar {
+    opacity: 1;
+}
+
+/* On paper the chrome is noise: a button nobody can press and a language
+   the code already shows. */
+@media print {
+    .cms-public .code-block__bar { display: none; }
+    .cms-public .code-block {
+        background: #ffffff;
+        border-color: #999999;
+    }
+    .cms-public .code-block pre { color: #000000; }
+}

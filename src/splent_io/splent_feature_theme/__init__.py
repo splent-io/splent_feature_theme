@@ -13,6 +13,13 @@ def init_feature(app):
     register_asset(
         "css", "theme.assets", order=0, subfolder="css", filename="public.css"
     )
+    # Reading chrome for code blocks: the language, and a button that
+    # copies. Registered by the shell rather than by a content feature,
+    # because every feature that renders markdown gets code blocks and none
+    # of them should ship their own copy button.
+    register_asset(
+        "js", "theme.assets", order=0, subfolder="js", filename="code_blocks.js"
+    )
 
 
 def _make_render_block():
