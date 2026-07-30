@@ -45,6 +45,12 @@
                     {% for lc in site.locales %}<a class="lang-switch__opt {{ 'is-active' if lc == site.locale else '' }}" href="{{ url_for('theme.set_language', code=lc) }}">{{ lc | upper }}</a>{% endfor %}
                 </span>
                 {% endif %}
+                {# The far right of the bar, after the language switcher. A
+                   separate slot rather than an order on layout.nav, because
+                   the switcher is markup in this template and a hook cannot
+                   sort itself past it. Whatever a reader thinks of as "their"
+                   control goes here: the account, and nothing else so far. #}
+                {% for hook in get_template_hooks("layout.nav.end") %}{{ hook() | safe }}{% endfor %}
             </nav>
         </div>
     </header>

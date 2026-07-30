@@ -370,3 +370,75 @@ a:hover { text-decoration: underline; }
 }
 .gallery-grid__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
 .gallery-grid__item:hover img { transform: scale(1.06); }
+
+/* ── Code highlighting ──────────────────────────────────────────────────────
+   The token classes splent_framework.markdown emits, all prefixed `tok-` so
+   they cannot collide with whatever classes a migrated body arrived carrying.
+
+   Every colour goes through a variable rather than being written into the
+   rule, because the two things a skin decides about a code block are its
+   background and how dark it is, and a palette that reads on a pale panel is
+   unreadable on a dark one. The defaults below are for a pale panel, which is
+   what a skin gets if it says nothing; a skin with a dark panel overrides the
+   eight variables in one block.
+
+   Only what carries meaning is coloured. Punctuation, plain names and
+   whitespace inherit, because a block where everything is a different colour
+   reads as decoration and stops helping anyone find the line they wanted. */
+.cms-public {
+    --code-comment: #646b74;
+    --code-keyword: #b5187f;
+    --code-string:  #1a7f37;
+    --code-number:  #b5541c;
+    --code-name:    #6f42c1;
+    --code-builtin: #0550ae;
+    --code-added:   #1a7f37;
+    --code-removed: #b31d28;
+}
+
+/* Comments: quieter than the code, and italic so a long licence header at the
+   top of a file is skimmed past rather than read. */
+.cms-public .tok-c, .cms-public .tok-c1, .cms-public .tok-cm,
+.cms-public .tok-ch, .cms-public .tok-cs, .cms-public .tok-cp,
+.cms-public .tok-cpf { color: var(--code-comment); font-style: italic; }
+
+/* Keywords and operators that are words (and, not, in). */
+.cms-public .tok-k, .cms-public .tok-kc, .cms-public .tok-kd,
+.cms-public .tok-kn, .cms-public .tok-kp, .cms-public .tok-kr,
+.cms-public .tok-kt, .cms-public .tok-ow { color: var(--code-keyword); font-weight: 600; }
+
+/* Strings, including the quotes and the escapes inside them. */
+.cms-public .tok-s, .cms-public .tok-s1, .cms-public .tok-s2,
+.cms-public .tok-sb, .cms-public .tok-sc, .cms-public .tok-sd,
+.cms-public .tok-se, .cms-public .tok-sh, .cms-public .tok-si,
+.cms-public .tok-sx, .cms-public .tok-sr, .cms-public .tok-ss,
+.cms-public .tok-sa, .cms-public .tok-dl,
+/* A YAML scalar is a literal rather than a quoted string, and it is the
+   right-hand side of every line in a compose file. */
+.cms-public .tok-l { color: var(--code-string); }
+
+.cms-public .tok-m, .cms-public .tok-mi, .cms-public .tok-mf,
+.cms-public .tok-mh, .cms-public .tok-mo, .cms-public .tok-mb { color: var(--code-number); }
+
+/* Things that were declared here: a function, a class, a tag, a variable. */
+.cms-public .tok-nf, .cms-public .tok-nc, .cms-public .tok-nt,
+.cms-public .tok-nd, .cms-public .tok-ne, .cms-public .tok-fm { color: var(--code-name); }
+
+/* Things that came with the language or the shell: builtins, constants,
+   attribute names. Three quarters of this corpus is bash, where this is the
+   class that does the work. */
+.cms-public .tok-nb, .cms-public .tok-bp, .cms-public .tok-no,
+.cms-public .tok-na, .cms-public .tok-nv, .cms-public .tok-vg,
+.cms-public .tok-vi, .cms-public .tok-vc, .cms-public .tok-vm { color: var(--code-builtin); }
+
+/* Diffs and terminal transcripts, which is what a practical is full of. */
+.cms-public .tok-gi { color: var(--code-added); }
+.cms-public .tok-gd { color: var(--code-removed); }
+.cms-public .tok-gp { color: var(--code-comment); user-select: none; }
+.cms-public .tok-gh, .cms-public .tok-gu { color: var(--code-name); font-weight: 600; }
+.cms-public .tok-ge { font-style: italic; }
+.cms-public .tok-gs { font-weight: 700; }
+
+/* A lexer that could not make sense of a character still shows it. Marking it
+   red would tell a reader their own page is broken, which it is not. */
+.cms-public .tok-err { color: inherit; }
