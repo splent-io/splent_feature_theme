@@ -55,3 +55,11 @@ templates = ["blocks/breadcrumb.html", "blocks/hero.html", "public_base.html", "
 models    = []
 hooks     = ["layout.authenticated_sidebar", "layout.body_start", "layout.footer", "layout.head", "layout.hero", "layout.nav", "layout.nav.end", "layout.scripts"]
 routes    = false
+
+# ── Configuration ─────────────────────────────────────────────────────────
+[tool.splent.config]
+# What the site calls itself in its own header. Empty falls back to the
+# package name, which is what the code calls it and not what anybody types
+# into a browser.
+SITE_NAME = ""
+SITE_TAGLINE = ""
