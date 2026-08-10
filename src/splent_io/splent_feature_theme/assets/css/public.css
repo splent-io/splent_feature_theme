@@ -574,6 +574,47 @@ a:hover { text-decoration: underline; }
     opacity: 1;
 }
 
+/* ── Forms ────────────────────────────────────────────────────────────────
+   Shared features render WTForms with Bootstrap-named classes (.form-label,
+   .form-control), so the public shell styles those names and a feature's
+   form looks native here without carrying its own stylesheet. */
+.form-label {
+    display: block;
+    margin-bottom: .4rem;
+    font-weight: 600;
+    color: var(--brand-heading);
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .55rem .8rem;
+    font: inherit;
+    color: var(--brand-text);
+    background: var(--brand-surface);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--brand-radius);
+}
+.form-control::placeholder { color: var(--brand-muted); }
+.form-control:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 20%, transparent);
+}
+.form-field { margin-bottom: 1.15rem; }
+.form-check-input { accent-color: var(--brand-primary); }
+.form-check-label { margin-left: .4rem; }
+.form-error { color: var(--brand-danger, #b3261e); font-size: .9rem; margin: .35rem 0 0; }
+.alert {
+    padding: .7rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--brand-border);
+    border-left: 4px solid var(--brand-primary);
+    border-radius: var(--brand-radius);
+    background: var(--brand-surface);
+}
+/* The narrow column a lone public form (log in, contact) sits in. */
+.form-page { max-width: 26rem; }
+
 /* On paper the chrome is noise: a button nobody can press and a language
    the code already shows. */
 @media print {
