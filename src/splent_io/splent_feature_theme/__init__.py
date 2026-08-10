@@ -91,6 +91,12 @@ def inject_context_vars(app):
         "gallery_title": app.config.get("SITE_GALLERY_TITLE", "Galería"),
         "cta": app.config.get("SITE_CTA", {}),
     }
+    # Open Graph image: opt-in by shipping static/og.png with the product.
+    # The shell emits og:image (and upgrades the twitter card) only when the
+    # file is really there; the theme never fabricates one.
+    site["og_image"] = bool(
+        app.static_folder and os.path.exists(os.path.join(app.static_folder, "og.png"))
+    )
     try:
         from flask_babel import get_locale as _get_locale
 

@@ -4,9 +4,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ page_description | default(site.tagline) }}">
 
-    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    {# The title block is rendered ONCE into page_title (a set-block capture,
+       verified to honour child overrides and super() on this Jinja version),
+       so <title> and og:title always agree without re-rendering the block.
+       The description cascades from the page (meta_description, with the
+       older page_description spelling kept working) to the product's tagline,
+       and is omitted entirely when neither provides one. #}
+    {% set page_title %}{% block title %}{{ site.name }}{% endblock %}{% endset %}
+    {% set meta_desc = meta_description | default(page_description, true) | default(site.tagline, true) %}
+    <title>{{ page_title | trim }}</title>
+    {% if meta_desc %}<meta name="description" content="{{ meta_desc }}">{% endif %}
+    <link rel="canonical" href="{{ request.base_url }}">
+
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:title" content="{{ page_title | trim }}">
+    {% if meta_desc %}<meta property="og:description" content="{{ meta_desc }}">{% endif %}
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta property="og:type" content="{{ og_type | default('website') }}">
+    {% if site.locale %}<meta property="og:locale" content="{{ site.locale }}">{% endif %}
+    {# og:image only when the product actually ships static/og.png; the theme
+       never fabricates one. Crawlers need an absolute URL. #}
+    {% if site.og_image %}
+    <meta property="og:image" content="{{ url_for('static', filename='og.png', _external=True) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% else %}
+    <meta name="twitter:card" content="summary">
+    {% endif %}
+
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
 
     {% if theme_tokens and theme_tokens.font_url %}

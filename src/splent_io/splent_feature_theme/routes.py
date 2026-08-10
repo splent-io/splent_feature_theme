@@ -1,6 +1,7 @@
 import json
 
 from flask import (
+    Response,
     current_app,
     flash,
     redirect,
@@ -29,6 +30,21 @@ APPEARANCE_FIELDS = [
     "brand_text",
     "brand_heading",
 ]
+
+
+@theme_bp.route("/robots.txt", methods=["GET"])
+def robots_txt():
+    """robots.txt for the public site: everything is crawlable.
+
+    The Sitemap line appears only when the product's derivation actually
+    serves one. The check is against ``current_app.view_functions`` at
+    request time, so the theme never imports the courses feature and a
+    product without it simply gets the plain allow-all file.
+    """
+    lines = ["User-agent: *", "Allow: /"]
+    if "courses.sitemap" in current_app.view_functions:
+        lines.append("Sitemap: " + url_for("courses.sitemap", _external=True))
+    return Response("\n".join(lines) + "\n", mimetype="text/plain")
 
 
 @theme_bp.route("/theme/preview", methods=["GET"])
