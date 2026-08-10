@@ -45,6 +45,7 @@ WordPress Customizer analogue) to the authenticated sidebar.
 """
 
 from flask import request, url_for
+from flask_babel import gettext as _
 
 from splent_framework.hooks.template_hooks import register_template_hook
 
@@ -60,7 +61,7 @@ def appearance_admin_link():
         f'<li class="sidebar-item {active}">'
         f'<a class="sidebar-link" href="{url_for("theme.admin_appearance")}">'
         '<i class="align-middle" data-feather="sliders"></i> '
-        '<span class="align-middle">Appearance</span>'
+        f'<span class="align-middle">{_("Appearance")}</span>'
         "</a>"
         "</li>"
     )
@@ -75,7 +76,7 @@ def menus_admin_link():
         f'<li class="sidebar-item {active}">'
         f'<a class="sidebar-link" href="{url_for("theme.admin_menus")}">'
         '<i class="align-middle" data-feather="menu"></i> '
-        '<span class="align-middle">Menus</span>'
+        f'<span class="align-middle">{_("Menus")}</span>'
         "</a>"
         "</li>"
     )

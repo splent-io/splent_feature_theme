@@ -1,10 +1,10 @@
 {% extends "base_template.html" %}
 
-{% block title %}Appearance{% endblock %}
+{% block title %}{{ _('Appearance') }}{% endblock %}
 
 {% block content %}
 <div class="d-flex flex-column align-items-start gap-2 mb-4">
-    <h1 class="h3 mb-0">Appearance</h1>
+    <h1 class="h3 mb-0">{{ _('Appearance') }}</h1>
 </div>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -17,33 +17,33 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="card mb-4">
         <div class="card-header">
-            <h2 class="h5 mb-0">Site</h2>
+            <h2 class="h5 mb-0">{{ _('Site') }}</h2>
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label" for="site_name">Site name</label>
+                    <label class="form-label" for="site_name">{{ _('Site name') }}</label>
                     <input name="site_name" id="site_name" class="form-control" value="{{ setting('site_name', '') }}">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="site_tagline">Tagline</label>
+                    <label class="form-label" for="site_tagline">{{ _('Tagline') }}</label>
                     <input name="site_tagline" id="site_tagline" class="form-control" value="{{ setting('site_tagline', '') }}">
                 </div>
                 <div class="col-12">
-                    <label class="form-label" for="site_logo">Logo URL</label>
+                    <label class="form-label" for="site_logo">{{ _('Logo URL') }}</label>
                     <input name="site_logo" id="site_logo" class="form-control" value="{{ setting('site_logo', '') }}">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="site_brand_mode">Header brand</label>
+                    <label class="form-label" for="site_brand_mode">{{ _('Header brand') }}</label>
                     {% set bm = setting('site_brand_mode', 'both') %}
                     <select name="site_brand_mode" id="site_brand_mode" class="form-select">
-                        <option value="both" {{ 'selected' if bm == 'both' }}>Logo + text</option>
-                        <option value="logo" {{ 'selected' if bm == 'logo' }}>Logo only</option>
-                        <option value="text" {{ 'selected' if bm == 'text' }}>Text only</option>
+                        <option value="both" {{ 'selected' if bm == 'both' }}>{{ _('Logo + text') }}</option>
+                        <option value="logo" {{ 'selected' if bm == 'logo' }}>{{ _('Logo only') }}</option>
+                        <option value="text" {{ 'selected' if bm == 'text' }}>{{ _('Text only') }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="site_logo_size">Logo height (px)</label>
+                    <label class="form-label" for="site_logo_size">{{ _('Logo height (px)') }}</label>
                     <input type="number" name="site_logo_size" id="site_logo_size" class="form-control"
                            value="{{ setting('site_logo_size', '40') }}" min="16" max="200">
                 </div>
@@ -53,39 +53,39 @@
 
     <div class="card mb-4">
         <div class="card-header">
-            <h2 class="h5 mb-0">Colors</h2>
+            <h2 class="h5 mb-0">{{ _('Colors') }}</h2>
         </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_primary">Primary</label>
+                    <label class="form-label" for="brand_primary">{{ _('Primary') }}</label>
                     <input type="color" name="brand_primary" id="brand_primary" class="form-control form-control-color" value="{{ setting('brand_primary', theme_tokens['primary']) }}">
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_accent">Accent</label>
+                    <label class="form-label" for="brand_accent">{{ _('Accent') }}</label>
                     <input type="color" name="brand_accent" id="brand_accent" class="form-control form-control-color" value="{{ setting('brand_accent', theme_tokens['accent']) }}">
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_bg">Background</label>
+                    <label class="form-label" for="brand_bg">{{ _('Background') }}</label>
                     <input type="color" name="brand_bg" id="brand_bg" class="form-control form-control-color" value="{{ setting('brand_bg', theme_tokens['bg']) }}">
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_surface">Surface</label>
+                    <label class="form-label" for="brand_surface">{{ _('Surface') }}</label>
                     <input type="color" name="brand_surface" id="brand_surface" class="form-control form-control-color" value="{{ setting('brand_surface', theme_tokens['surface']) }}">
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_text">Text</label>
+                    <label class="form-label" for="brand_text">{{ _('Text') }}</label>
                     <input type="color" name="brand_text" id="brand_text" class="form-control form-control-color" value="{{ setting('brand_text', theme_tokens['text']) }}">
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <label class="form-label" for="brand_heading">Heading</label>
+                    <label class="form-label" for="brand_heading">{{ _('Heading') }}</label>
                     <input type="color" name="brand_heading" id="brand_heading" class="form-control form-control-color" value="{{ setting('brand_heading', theme_tokens['heading']) }}">
                 </div>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
-            <span class="text-muted small">Changes apply immediately.</span>
-            <button class="btn btn-primary" type="submit">Save changes</button>
+            <span class="text-muted small">{{ _('Changes apply immediately.') }}</span>
+            <button class="btn btn-primary" type="submit">{{ _('Save changes') }}</button>
         </div>
     </div>
 </form>

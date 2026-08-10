@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-30 15:43+0000\n"
-"PO-Revision-Date: 2026-06-28 10:00+0000\n"
+"POT-Creation-Date: 2026-08-10 15:13+0000\n"
+"PO-Revision-Date: 2026-08-10 10:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
@@ -18,6 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: src/splent_io/splent_feature_theme/hooks.py:64
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:3
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:7
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: src/splent_io/splent_feature_theme/hooks.py:79
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:3
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:12
+msgid "Menus"
+msgstr "Menús"
+
+#: src/splent_io/splent_feature_theme/routes.py:63
+msgid "Appearance updated."
+msgstr "Apariencia actualizada."
+
+#: src/splent_io/splent_feature_theme/routes.py:87
+msgid "Menu updated."
+msgstr "Menú actualizado."
+
 #: src/splent_io/splent_feature_theme/templates/public_base.html:37
 msgid "Menu"
 msgstr "Menú"
@@ -26,7 +46,7 @@ msgstr "Menú"
 msgid "Main navigation"
 msgstr "Navegación principal"
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:77
+#: src/splent_io/splent_feature_theme/templates/public_base.html:83
 msgid "Made with"
 msgstr "Hecho con"
 
@@ -34,3 +54,156 @@ msgstr "Hecho con"
 msgid "Breadcrumb"
 msgstr "Ruta de navegación"
 
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:20
+msgid "Site"
+msgstr "Sitio"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:25
+msgid "Site name"
+msgstr "Nombre del sitio"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:29
+msgid "Tagline"
+msgstr "Descripción corta"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:33
+msgid "Logo URL"
+msgstr "URL del logotipo"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:37
+msgid "Header brand"
+msgstr "Marca de la cabecera"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:40
+msgid "Logo + text"
+msgstr "Logotipo y texto"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:41
+msgid "Logo only"
+msgstr "Solo logotipo"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:42
+msgid "Text only"
+msgstr "Solo texto"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:46
+msgid "Logo height (px)"
+msgstr "Alto del logotipo (px)"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+msgid "Colors"
+msgstr "Colores"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:61
+msgid "Primary"
+msgstr "Primario"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:65
+msgid "Accent"
+msgstr "Acento"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:69
+msgid "Background"
+msgstr "Fondo"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:73
+msgid "Surface"
+msgstr "Superficie"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:77
+msgid "Text"
+msgstr "Texto"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:81
+msgid "Heading"
+msgstr "Encabezados"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:87
+msgid "Changes apply immediately."
+msgstr "Los cambios se aplican al instante."
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:88
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:15
+msgid ""
+"The main navigation is composed from the installed features, and each "
+"content feature contributes its page. Reorder, rename or hide them, and "
+"add custom external links. Changes apply immediately."
+msgstr ""
+"La navegación principal se compone de las funcionalidades instaladas, y "
+"cada funcionalidad de contenido aporta su página. Puedes reordenarlas, "
+"renombrarlas u ocultarlas, y añadir enlaces externos personalizados. Los "
+"cambios se aplican al instante."
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:34
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:83
+msgid "custom"
+msgstr "personalizado"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:35
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:84
+msgid "Label"
+msgstr "Etiqueta"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:37
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:59
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:86
+msgid "Move up"
+msgstr "Subir"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:38
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:60
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:87
+msgid "Move down"
+msgstr "Bajar"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+msgid "Show or hide"
+msgstr "Mostrar u ocultar"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:98
+msgid "Hide"
+msgstr "Ocultar"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:99
+msgid "Show"
+msgstr "Mostrar"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:63
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:89
+msgid "Remove"
+msgstr "Eliminar"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+msgid "This feature is no longer installed"
+msgstr "Esta funcionalidad ya no está instalada"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+msgid "not installed"
+msgstr "no instalada"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:53
+msgid "feature"
+msgstr "funcionalidad"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:57
+msgid "(unavailable)"
+msgstr "(no disponible)"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:72
+msgid "Add custom link"
+msgstr "Añadir enlace personalizado"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:73
+msgid "Save menu"
+msgstr "Guardar menú"

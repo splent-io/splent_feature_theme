@@ -9,6 +9,7 @@ from flask import (
     session,
     url_for,
 )
+from flask_babel import gettext as _
 from flask_login import login_required
 
 from splent_io.splent_feature_theme import theme_bp
@@ -59,7 +60,7 @@ def admin_appearance():
     if request.method == "POST":
         values = {field: request.form.get(field, "") for field in APPEARANCE_FIELDS}
         service_proxy("SettingsService").set_many(values)
-        flash("Appearance updated.", "success")
+        flash(_("Appearance updated."), "success")
         return redirect(url_for("theme.admin_appearance"))
 
     return render_template("theme/admin/appearance.html")
@@ -83,7 +84,7 @@ def admin_menus():
         service_proxy("SettingsService").set(
             "site_nav", json.dumps(override, ensure_ascii=False)
         )
-        flash("Menu updated.", "success")
+        flash(_("Menu updated."), "success")
         return redirect(url_for("theme.admin_menus"))
 
     return render_template("theme/admin/menus.html", rows=editor_rows(current_app))

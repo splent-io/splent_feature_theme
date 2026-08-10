@@ -7,6 +7,7 @@
     <meta name="description" content="{{ page_description | default(site.tagline) }}">
 
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
 
     {% if theme_tokens and theme_tokens.font_url %}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

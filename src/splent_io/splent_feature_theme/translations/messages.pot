@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-30 15:43+0000\n"
+"POT-Creation-Date: 2026-08-10 15:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+
+#: src/splent_io/splent_feature_theme/hooks.py:64
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:3
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:7
+msgid "Appearance"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/hooks.py:79
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:3
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:12
+msgid "Menus"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/routes.py:63
+msgid "Appearance updated."
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/routes.py:87
+msgid "Menu updated."
+msgstr ""
 
 #: src/splent_io/splent_feature_theme/templates/public_base.html:37
 msgid "Menu"
@@ -25,11 +45,161 @@ msgstr ""
 msgid "Main navigation"
 msgstr ""
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:77
+#: src/splent_io/splent_feature_theme/templates/public_base.html:83
 msgid "Made with"
 msgstr ""
 
 #: src/splent_io/splent_feature_theme/templates/blocks/breadcrumb.html:13
 msgid "Breadcrumb"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:20
+msgid "Site"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:25
+msgid "Site name"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:29
+msgid "Tagline"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:33
+msgid "Logo URL"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:37
+msgid "Header brand"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:40
+msgid "Logo + text"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:41
+msgid "Logo only"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:42
+msgid "Text only"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:46
+msgid "Logo height (px)"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+msgid "Colors"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:61
+msgid "Primary"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:65
+msgid "Accent"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:69
+msgid "Background"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:73
+msgid "Surface"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:77
+msgid "Text"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:81
+msgid "Heading"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:87
+msgid "Changes apply immediately."
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:88
+msgid "Save changes"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:15
+msgid ""
+"The main navigation is composed from the installed features, and each "
+"content feature contributes its page. Reorder, rename or hide them, and "
+"add custom external links. Changes apply immediately."
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:34
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:83
+msgid "custom"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:35
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:84
+msgid "Label"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:37
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:59
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:86
+msgid "Move up"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:38
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:60
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:87
+msgid "Move down"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+msgid "Show or hide"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:98
+msgid "Hide"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:99
+msgid "Show"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:63
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:89
+msgid "Remove"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+msgid "This feature is no longer installed"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+msgid "not installed"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:53
+msgid "feature"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:57
+msgid "(unavailable)"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:72
+msgid "Add custom link"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:73
+msgid "Save menu"
 msgstr ""
 
