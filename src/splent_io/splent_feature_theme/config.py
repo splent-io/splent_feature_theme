@@ -21,12 +21,20 @@ def inject_config(app):
     site_name = os.getenv("SITE_NAME", "").strip()
     # The line under it, where a product has one.
     tagline = os.getenv("SITE_TAGLINE", "").strip()
+    # How the header brand renders when the admin panel says nothing:
+    # logo, text, or both; and the logo height in pixels.
+    brand_mode = os.getenv("SITE_BRAND_MODE", "").strip()
+    logo_size = os.getenv("SITE_LOGO_SIZE", "").strip()
 
     values = {}
     if site_name:
         values["SITE_NAME"] = site_name
     if tagline:
         values["SITE_TAGLINE"] = tagline
+    if brand_mode:
+        values["SITE_BRAND_MODE"] = brand_mode
+    if logo_size:
+        values["SITE_LOGO_SIZE"] = logo_size
 
     # setdefault rather than assignment: a product that sets these in its own
     # config.py has said something more specific than an environment default,

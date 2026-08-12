@@ -54,8 +54,8 @@
 
     <header class="site-header">
         <div class="container site-header__inner">
-            {% set brand_mode = setting('site_brand_mode', 'both') %}
-            {% set logo_size = setting('site_logo_size', '40') %}
+            {% set brand_mode = setting('site_brand_mode', config.get('SITE_BRAND_MODE', 'both')) %}
+            {% set logo_size = setting('site_logo_size', config.get('SITE_LOGO_SIZE', '40')) %}
             <a class="site-brand" href="/">
                 {% if site.logo and brand_mode in ('logo', 'both') %}<img class="site-brand__logo" src="{{ url_for('static', filename=site.logo) }}" alt="{{ site.name }}" style="height:{{ logo_size }}px;width:auto">{% endif %}
                 {% if brand_mode in ('text', 'both') %}<span class="site-brand__name">{{ site.name }}</span>{% endif %}

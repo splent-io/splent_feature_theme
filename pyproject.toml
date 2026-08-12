@@ -63,3 +63,7 @@ routes    = false
 # into a browser.
 SITE_NAME = ""
 SITE_TAGLINE = ""
+# Header brand when the Appearance panel says nothing: logo, text or both,
+# and the logo height in pixels.
+SITE_BRAND_MODE = ""
+SITE_LOGO_SIZE = ""
