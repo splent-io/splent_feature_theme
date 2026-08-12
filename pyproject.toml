@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_theme"
-version = "0.7.0"
+version = "0.7.1"
 readme = "README.md"
 requires-python = ">=3.13"
 
@@ -46,7 +46,7 @@ docker     = []
 
 [tool.splent.contract.requires]
 features = ["settings"]
-env_vars = ["SITE_NAME", "SITE_TAGLINE", "SPLENT_APP"]
+env_vars = ["SITE_BRAND_MODE", "SITE_LOGO_SIZE", "SITE_NAME", "SITE_TAGLINE", "SPLENT_APP"]
 signals  = []
 
 [tool.splent.contract.extensible]
