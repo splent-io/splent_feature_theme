@@ -17,7 +17,7 @@
             {%- if loop.last %}
             <li class="breadcrumb-level"><span class="breadcrumb-current" aria-current="page">{{ crumb.label }}</span></li>
             {%- elif crumb.url %}
-            <li class="breadcrumb-level"><a class="breadcrumb-link" href="{{ crumb.url }}">{{ crumb.label }}</a></li>
+            <li class="breadcrumb-level"><a class="breadcrumb-link" href="{{ crumb.url }}">{%- if loop.first and crumb.url == '/' %}<svg class="breadcrumb-home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> {% endif %}{{ crumb.label }}</a></li>
             {%- else %}
             {#- A level the reader cannot open, such as a grouping with no page
                 of its own. It is still part of the trail. #}

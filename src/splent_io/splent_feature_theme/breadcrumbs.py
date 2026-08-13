@@ -41,6 +41,11 @@ def build_trail(path, page_title, nav, mode="deep"):
     for position, segment in enumerate(segments[:-1]):
         if position == 0 and section is not None:
             trail.append({"label": section["label"], "url": section["href"]})
+        elif segment.isdigit():
+            # Date-shaped permalinks (/2026/06/20/slug/) would read as
+            # Home > 2026 > 06 > 20 > Title; the numbers locate nothing a
+            # reader can navigate to, so they draw no crumb.
+            continue
         else:
             # A level with no page of its own; the block renders it as text.
             trail.append({"label": _prettify(segment), "url": None})
