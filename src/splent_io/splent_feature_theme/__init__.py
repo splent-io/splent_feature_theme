@@ -20,6 +20,13 @@ def init_feature(app):
     register_asset(
         "js", "theme.assets", order=0, subfolder="js", filename="code_blocks.js"
     )
+    # Header-offset variable and the shared lightbox: rich-text images and
+    # anything marked data-lightbox open full-screen. Shell-owned for the
+    # same reason as the copy button, every content feature benefits and
+    # none should ship its own.
+    register_asset(
+        "js", "theme.assets", order=0, subfolder="js", filename="lightbox.js"
+    )
 
 
 def _make_render_block():

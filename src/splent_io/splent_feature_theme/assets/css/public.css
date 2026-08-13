@@ -625,3 +625,48 @@ a:hover { text-decoration: underline; }
     }
     .cms-public .code-block pre { color: #000000; }
 }
+
+/* ── Lightbox ──────────────────────────────────────────────────────────── */
+/* Rich-text images and anything marked data-lightbox open full-screen
+ * (lightbox.js). The cursor tells the reader the image is expandable. */
+.prose img,
+img[data-lightbox],
+[data-lightbox] img {
+    cursor: zoom-in;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.86);
+    cursor: zoom-out;
+}
+
+.lightbox__img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--brand-radius);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    border: 0;
+    background: none;
+    color: #fff;
+    font-size: 2.25rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.lightbox__close:hover {
+    opacity: 1;
+}
