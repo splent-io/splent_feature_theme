@@ -23,6 +23,7 @@ APPEARANCE_FIELDS = [
     "site_logo",
     "site_brand_mode",
     "site_logo_size",
+    "site_breadcrumbs",
     "brand_primary",
     "brand_accent",
     "brand_bg",

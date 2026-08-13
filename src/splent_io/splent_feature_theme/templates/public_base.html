@@ -82,9 +82,16 @@
     </header>
 
     {# Any page can hand the shell a trail of {label, url} entries as
-       `breadcrumb`; pages that do not get no markup at all. See
-       blocks/breadcrumb.html and the module docstring of hooks.py. #}
-    {% if breadcrumb %}{{ render_block('breadcrumb', breadcrumb=breadcrumb) }}{% endif %}
+       `breadcrumb`; that explicit trail always wins. Every other page gets
+       a trail derived from the URL and its title, governed by the
+       site_breadcrumbs appearance setting (deep / all / off) — and no
+       markup at all when the mode hides it. See blocks/breadcrumb.html and
+       the module docstrings of hooks.py and breadcrumbs.py. #}
+    {%- if breadcrumb %}{{ render_block('breadcrumb', breadcrumb=breadcrumb) }}
+    {%- else %}
+    {%- set auto_trail = auto_breadcrumb(page_title | trim, setting('site_breadcrumbs', config.get('SITE_BREADCRUMBS', 'deep'))) %}
+    {%- if auto_trail %}{{ render_block('breadcrumb', breadcrumb=auto_trail) }}{% endif %}
+    {%- endif %}
 
     {% for hook in get_template_hooks("layout.hero") %}{{ hook() | safe }}{% endfor %}
     {% block hero %}{% endblock %}

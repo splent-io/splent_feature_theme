@@ -47,6 +47,16 @@
                     <input type="number" name="site_logo_size" id="site_logo_size" class="form-control"
                            value="{{ setting('site_logo_size', '40') }}" min="16" max="200">
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="site_breadcrumbs">{{ _('Breadcrumbs') }}</label>
+                    {% set bc = setting('site_breadcrumbs', config.get('SITE_BREADCRUMBS', 'deep')) %}
+                    <select name="site_breadcrumbs" id="site_breadcrumbs" class="form-select">
+                        <option value="deep" {{ 'selected' if bc == 'deep' }}>{{ _('Only on deeper pages') }}</option>
+                        <option value="all" {{ 'selected' if bc == 'all' }}>{{ _('On every page') }}</option>
+                        <option value="off" {{ 'selected' if bc == 'off' }}>{{ _('Never') }}</option>
+                    </select>
+                    <div class="form-text">{{ _('The trail under the header that shows where the reader is. Pages that bring their own trail keep it.') }}</div>
+                </div>
             </div>
         </div>
     </div>

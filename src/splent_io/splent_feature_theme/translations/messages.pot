@@ -89,6 +89,32 @@ msgstr ""
 msgid "Logo height (px)"
 msgstr ""
 
+#: src/splent_io/splent_feature_theme/breadcrumbs.py:38
+msgid "Home"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:52
+msgid "Breadcrumbs"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:55
+msgid "Only on deeper pages"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+msgid "On every page"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:57
+msgid "Never"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:59
+msgid ""
+"The trail under the header that shows where the reader is. Pages that "
+"bring their own trail keep it."
+msgstr ""
+
 #: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
 msgid "Colors"
 msgstr ""

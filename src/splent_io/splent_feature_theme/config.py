@@ -25,6 +25,9 @@ def inject_config(app):
     # logo, text, or both; and the logo height in pixels.
     brand_mode = os.getenv("SITE_BRAND_MODE", "").strip()
     logo_size = os.getenv("SITE_LOGO_SIZE", "").strip()
+    # Where the automatic breadcrumb trail appears when the admin panel
+    # says nothing: deep, all, or off.
+    breadcrumbs = os.getenv("SITE_BREADCRUMBS", "").strip()
 
     values = {}
     if site_name:
@@ -35,6 +38,8 @@ def inject_config(app):
         values["SITE_BRAND_MODE"] = brand_mode
     if logo_size:
         values["SITE_LOGO_SIZE"] = logo_size
+    if breadcrumbs:
+        values["SITE_BREADCRUMBS"] = breadcrumbs
 
     # setdefault rather than assignment: a product that sets these in its own
     # config.py has said something more specific than an environment default,

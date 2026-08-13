@@ -46,7 +46,7 @@ docker     = []
 
 [tool.splent.contract.requires]
 features = ["settings"]
-env_vars = ["SITE_BRAND_MODE", "SITE_LOGO_SIZE", "SITE_NAME", "SITE_TAGLINE", "SPLENT_APP"]
+env_vars = ["SITE_BRAND_MODE", "SITE_BREADCRUMBS", "SITE_LOGO_SIZE", "SITE_NAME", "SITE_TAGLINE", "SPLENT_APP"]
 signals  = []
 
 [tool.splent.contract.extensible]
@@ -67,3 +67,7 @@ SITE_TAGLINE = ""
 # and the logo height in pixels.
 SITE_BRAND_MODE = ""
 SITE_LOGO_SIZE = ""
+# Where the automatic breadcrumb trail appears when the Appearance panel
+# says nothing: deep shows it only on pages two levels down or more, all
+# on every page except the home, off never.
+SITE_BREADCRUMBS = ""

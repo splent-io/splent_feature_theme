@@ -90,6 +90,34 @@ msgstr "Solo texto"
 msgid "Logo height (px)"
 msgstr "Alto del logotipo (px)"
 
+#: src/splent_io/splent_feature_theme/breadcrumbs.py:38
+msgid "Home"
+msgstr "Inicio"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:52
+msgid "Breadcrumbs"
+msgstr "Ruta de navegación"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:55
+msgid "Only on deeper pages"
+msgstr "Solo en páginas interiores"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+msgid "On every page"
+msgstr "En todas las páginas"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:57
+msgid "Never"
+msgstr "Nunca"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:59
+msgid ""
+"The trail under the header that shows where the reader is. Pages that "
+"bring their own trail keep it."
+msgstr ""
+"La ruta bajo la cabecera que muestra dónde está el lector. Las páginas "
+"que aportan su propia ruta la conservan."
+
 #: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
 msgid "Colors"
 msgstr "Colores"

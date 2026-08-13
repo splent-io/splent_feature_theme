@@ -78,6 +78,19 @@ def inject_context_vars(app):
     from splent_io.splent_feature_theme.nav import compose_nav
 
     nav = compose_nav(app, _translate)
+
+    # {{ auto_breadcrumb(page_title, mode) }} — the derived trail for the
+    # current request, or None when the mode hides it there. Bound to the
+    # composed nav above, so a menu rename in the admin renames the section
+    # crumb too. The shell calls it only when the page passed no explicit
+    # `breadcrumb`; that one always wins.
+    from splent_io.splent_feature_theme.breadcrumbs import build_trail
+
+    def auto_breadcrumb(page_title, mode="deep"):
+        from flask import request
+
+        return build_trail(request.path, page_title, nav, mode)
+
     site = {
         "name": _s(
             "site_name",
@@ -117,5 +130,6 @@ def inject_context_vars(app):
         "theme_tokens": tokens,
         "theme_tokens_css": tokens_to_css(tokens),
         "render_block": _make_render_block(),
+        "auto_breadcrumb": auto_breadcrumb,
         "site": site,
     }

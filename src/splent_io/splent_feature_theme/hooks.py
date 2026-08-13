@@ -14,10 +14,15 @@ The theme registers nothing into the public slots by default — products and
 content features compose the page. Skins refine the theme by overriding tokens
 (THEME_TOKENS) and, if needed, block templates via [tool.splent.refinement].
 
-Breadcrumbs are not a hook. The shell renders one under the header for every
-page whose template context carries a `breadcrumb` variable, and renders no
-markup at all for the pages that do not, so a feature passes a list and
-imports nothing:
+Breadcrumbs are not a hook. The shell draws one under the header on its own:
+Home, then the section whose nav entry matches the first path segment (so
+the admin's Menus edits are honoured), then the page title. The Appearance
+setting `site_breadcrumbs` governs where — "deep" (default) only on pages
+two levels down or more, "all" on every page except the home, "off" never
+(see breadcrumbs.py). A page that needs a richer trail — deeper hierarchies,
+labels no URL segment carries — passes an explicit `breadcrumb` list, which
+always wins over the automatic one whatever the mode says, and imports
+nothing:
 
     return render_template(
         "courses/page.html",
