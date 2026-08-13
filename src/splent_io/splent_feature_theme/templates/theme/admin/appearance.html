@@ -63,6 +63,30 @@
 
     <div class="card mb-4">
         <div class="card-header">
+            <h2 class="h5 mb-0">{{ _('Error page') }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label" for="site_404_title">{{ _('Title') }}</label>
+                <input class="form-control" type="text" id="site_404_title" name="site_404_title"
+                       value="{{ setting('site_404_title', '') }}" placeholder="{{ _('Page not found') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="site_404_text">{{ _('Message') }}</label>
+                <input class="form-control" type="text" id="site_404_text" name="site_404_text"
+                       value="{{ setting('site_404_text', '') }}" placeholder="{{ _('The page you are looking for does not exist or has moved.') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="site_404_cta">{{ _('Button label') }}</label>
+                <input class="form-control" type="text" id="site_404_cta" name="site_404_cta"
+                       value="{{ setting('site_404_cta', '') }}" placeholder="{{ _('Back to the home page') }}">
+                <div class="form-text">{{ _('What the page says when a reader lands on a missing address. Empty fields keep the translated defaults.') }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
             <h2 class="h5 mb-0">{{ _('Colors') }}</h2>
         </div>
         <div class="card-body">

@@ -252,3 +252,27 @@ msgstr ""
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:95
 msgid "Add footer link"
 msgstr "Añadir enlace al pie"
+
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+msgid "The page you are looking for does not exist or has moved."
+msgstr "La página que buscas no existe o se ha movido."
+
+msgid "Back to the home page"
+msgstr "Volver a la página de inicio"
+
+msgid "Error page"
+msgstr "Página de error"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Message"
+msgstr "Mensaje"
+
+msgid "Button label"
+msgstr "Texto del botón"
+
+msgid "What the page says when a reader lands on a missing address. Empty fields keep the translated defaults."
+msgstr "Lo que dice la página cuando alguien llega a una dirección inexistente. Los campos vacíos mantienen los textos traducidos por defecto."

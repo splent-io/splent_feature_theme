@@ -1,0 +1,46 @@
+{% extends "public_base.html" %}
+
+{% block title %}{{ setting('site_404_title', _('Page not found')) }} — {{ site.name }}{% endblock %}
+
+{% block head %}
+<style>
+    .error-page {
+        max-width: 34rem;
+        margin-inline: auto;
+        padding-block: 5rem;
+        text-align: center;
+    }
+
+    .error-page__code {
+        margin: 0;
+        font-family: var(--brand-font-heading);
+        font-size: clamp(4rem, 12vw, 7rem);
+        line-height: 1;
+        color: var(--brand-primary);
+    }
+
+    .error-page__title {
+        margin: 1rem 0 0;
+        font-family: var(--brand-font-heading);
+        color: var(--brand-heading);
+    }
+
+    .error-page__text {
+        margin: 1rem 0 2rem;
+        color: var(--brand-muted);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container section">
+    {# What the page says is the product's voice, editable from the admin
+       Appearance screen; empty settings fall back to the translated copy. #}
+    <div class="error-page">
+        <p class="error-page__code" aria-hidden="true">404</p>
+        <h1 class="error-page__title">{{ setting('site_404_title', _('Page not found')) }}</h1>
+        <p class="error-page__text">{{ setting('site_404_text', _('The page you are looking for does not exist or has moved.')) }}</p>
+        <a class="btn btn-primary" href="/">{{ setting('site_404_cta', _('Back to the home page')) }}</a>
+    </div>
+</div>
+{% endblock %}

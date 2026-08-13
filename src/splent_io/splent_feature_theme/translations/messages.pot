@@ -243,3 +243,27 @@ msgstr ""
 msgid "Add footer link"
 msgstr ""
 
+
+msgid "Page not found"
+msgstr ""
+
+msgid "The page you are looking for does not exist or has moved."
+msgstr ""
+
+msgid "Back to the home page"
+msgstr ""
+
+msgid "Error page"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Button label"
+msgstr ""
+
+msgid "What the page says when a reader lands on a missing address. Empty fields keep the translated defaults."
+msgstr ""
