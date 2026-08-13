@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_theme"
-version = "0.10.0"
+version = "0.11.0"
 readme = "README.md"
 requires-python = ">=3.13"
 
@@ -51,7 +51,7 @@ signals  = []
 
 [tool.splent.contract.extensible]
 services  = []
-templates = ["blocks/breadcrumb.html", "blocks/hero.html", "public_base.html", "theme/admin/appearance.html", "theme/admin/menus.html", "theme/index.html", "theme/preview.html"]
+templates = ["blocks/breadcrumb.html", "blocks/hero.html", "errors/404.html", "errors/500.html", "public_base.html", "theme/admin/appearance.html", "theme/admin/menus.html", "theme/index.html", "theme/preview.html"]
 models    = []
 hooks     = ["layout.authenticated_sidebar", "layout.body_start", "layout.footer", "layout.head", "layout.hero", "layout.nav", "layout.nav.end", "layout.scripts"]
 routes    = false
