@@ -229,3 +229,17 @@ msgstr ""
 msgid "Save menu"
 msgstr ""
 
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:76
+msgid "Footer links"
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:78
+msgid ""
+"A row of plain links shown in the site footer, before the social links. A"
+" row is saved only with both a label and an address."
+msgstr ""
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:95
+msgid "Add footer link"
+msgstr ""
+

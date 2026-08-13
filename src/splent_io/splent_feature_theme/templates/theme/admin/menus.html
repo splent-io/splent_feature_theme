@@ -5,7 +5,7 @@
 {% block content %}
 <style>
   .nav-row--hidden { opacity: .55; }
-  #nav-rows { list-style: none; padding-left: 0; }
+  #nav-rows, #footer-rows { list-style: none; padding-left: 0; }
 </style>
 
 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -23,6 +23,7 @@
 
 <form method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h2 class="h5">{{ _('Main navigation') }}</h2>
     <ul id="nav-rows">
         {% for row in rows %}
         {% if row.type == 'custom' %}
@@ -68,8 +69,30 @@
         {% endfor %}
     </ul>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
+    <div class="mt-2">
         <button type="button" id="add-custom" class="btn btn-outline-primary btn-sm">+ {{ _('Add custom link') }}</button>
+    </div>
+
+    <h2 class="h5 mt-4">{{ _('Footer links') }}</h2>
+    <p class="text-muted">
+        {{ _('A row of plain links shown in the site footer, before the social links. A row is saved only with both a label and an address.') }}
+    </p>
+    <ul id="footer-rows">
+        {% for row in footer_rows %}
+        <li class="footer-row card mb-2">
+            <div class="card-body d-flex align-items-center gap-2 py-2">
+                <input name="footer_label" class="form-control form-control-sm" style="max-width:240px" value="{{ row.label }}" placeholder="{{ _('Label') }}">
+                <input name="footer_href" class="form-control form-control-sm" value="{{ row.href }}" placeholder="https://…">
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="{{ _('Move up') }}">↑</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="{{ _('Move down') }}">↓</button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="{{ _('Remove') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <button type="button" id="add-footer-link" class="btn btn-outline-primary btn-sm">+ {{ _('Add footer link') }}</button>
         <button type="submit" class="btn btn-primary">{{ _('Save menu') }}</button>
     </div>
 </form>
@@ -86,6 +109,18 @@
             <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="{{ _('Move up') }}">↑</button>
             <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="{{ _('Move down') }}">↓</button>
             <button type="button" class="btn btn-sm btn-outline-secondary btn-toggle" title="{{ _('Show or hide') }}">{{ _('Hide') }}</button>
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="{{ _('Remove') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+    </li>
+</template>
+
+<template id="footer-row-tpl">
+    <li class="footer-row card mb-2">
+        <div class="card-body d-flex align-items-center gap-2 py-2">
+            <input name="footer_label" class="form-control form-control-sm" style="max-width:240px" value="" placeholder="{{ _('Label') }}">
+            <input name="footer_href" class="form-control form-control-sm" value="" placeholder="https://…">
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-up" title="{{ _('Move up') }}">↑</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-down" title="{{ _('Move down') }}">↓</button>
             <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="{{ _('Remove') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
     </li>
@@ -131,6 +166,33 @@
     });
 
     Array.prototype.forEach.call(list.querySelectorAll('.nav-row'), paintVisible);
+})();
+
+(function () {
+    // The footer rows mirror the nav rows minus visibility: custom links
+    // only, so a row the admin does not want is simply removed.
+    var list = document.getElementById('footer-rows');
+    var tpl = document.getElementById('footer-row-tpl');
+
+    list.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var row = e.target.closest('.footer-row');
+        if (!row) return;
+        if (btn.classList.contains('btn-up') && row.previousElementSibling) {
+            list.insertBefore(row, row.previousElementSibling);
+        } else if (btn.classList.contains('btn-down') && row.nextElementSibling) {
+            list.insertBefore(row.nextElementSibling, row);
+        } else if (btn.classList.contains('btn-remove')) {
+            row.remove();
+        }
+    });
+
+    document.getElementById('add-footer-link').addEventListener('click', function () {
+        // Clone a static template node — never build DOM from user-entered values.
+        var node = tpl.content.firstElementChild.cloneNode(true);
+        list.appendChild(node);
+    });
 })();
 </script>
 {% endblock %}

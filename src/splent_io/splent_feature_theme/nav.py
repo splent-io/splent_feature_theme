@@ -14,19 +14,27 @@ Override JSON shape (a list, in menu order)::
       {"type": "feature", "key": "team", "label": "Our team", "visible": false},
       {"type": "custom", "label": "Old site", "href": "https://…"}
     ]
+
+The footer gets its own, simpler row of links from the same editor, stored
+under ``site_footer_nav`` (a JSON list of ``{label, href}`` in order). Custom
+links only — no feature entries, so there is nothing to reconcile.
 """
 
 import json
 
 from splent_framework.nav.nav_registry import get_nav_items
 
+# The Footer links section never stores more rows than this; a footer that
+# needs more links than fit on two lines is a design problem, not a menu.
+FOOTER_NAV_MAX = 20
 
-def _load_override(app):
-    """Parsed override list from the settings store, or None if absent/invalid."""
+
+def _load_setting_list(app, key):
+    """Parsed JSON list from the settings store, or None if absent/invalid."""
     try:
         from splent_framework.services.service_locator import service_proxy
 
-        raw = service_proxy("SettingsService").get("site_nav", None)
+        raw = service_proxy("SettingsService").get(key, None)
     except Exception:
         raw = None
     if not raw:
@@ -48,7 +56,7 @@ def compose_nav(app, translate):
     """
     base = get_nav_items()
     by_key = {i["key"]: i for i in base}
-    override = _load_override(app)
+    override = _load_setting_list(app, "site_nav")
 
     if override is not None:
         nav = []
@@ -98,7 +106,7 @@ def editor_rows(app):
     """
     base = get_nav_items()
     by_key = {i["key"]: i for i in base}
-    override = _load_override(app)
+    override = _load_setting_list(app, "site_nav")
     rows = []
     seen = set()
 
@@ -201,4 +209,74 @@ def parse_override(form):
             if label:
                 row["label"] = label
             out.append(row)
+    return out
+
+
+def compose_footer_nav(app, translate):
+    """Final render-ready footer links: list of ``{label, href}``, [] when unset.
+
+    Read from the ``site_footer_nav`` setting written by the Menus editor.
+    Custom links only, so there is no feature reconciliation — entries missing
+    a label or carrying an unsafe href are skipped, and the list is capped at
+    ``FOOTER_NAV_MAX`` however the stored JSON was produced.
+    """
+    data = _load_setting_list(app, "site_footer_nav")
+    if not data:
+        return []
+    links = []
+    for entry in data:
+        if not isinstance(entry, dict):
+            continue
+        label = (entry.get("label") or "").strip()
+        href = _safe_href(entry.get("href"))  # block javascript:/data: at render too
+        if label and href:
+            links.append({"label": translate(label), "href": href})
+        if len(links) >= FOOTER_NAV_MAX:
+            break
+    return links
+
+
+def footer_editor_rows(app):
+    """Rows for the Footer links section of the Menus editor: ``{label, href}``.
+
+    The stored entries as the admin typed them (stripped), in order — invalid
+    rows are kept visible here so the admin can fix or remove them, while
+    ``compose_footer_nav`` keeps them off the public page.
+    """
+    data = _load_setting_list(app, "site_footer_nav") or []
+    rows = []
+    for entry in data:
+        if not isinstance(entry, dict):
+            continue
+        rows.append(
+            {
+                "label": (entry.get("label") or "").strip(),
+                "href": (entry.get("href") or "").strip(),
+            }
+        )
+    return rows
+
+
+def parse_footer_links(form):
+    """Build the footer links list from the editor POST.
+
+    The footer rows submit index-aligned parallel arrays so order is
+    preserved: ``footer_label[] footer_href[]``. A row is stored only with
+    both a label and a safe href (whitespace stripped, empty rows dropped),
+    and the list is capped at ``FOOTER_NAV_MAX`` entries.
+    """
+    labels = form.getlist("footer_label")
+    hrefs = form.getlist("footer_href")
+
+    def at(arr, i):
+        return arr[i] if i < len(arr) else ""
+
+    out = []
+    for i in range(len(labels)):
+        label = at(labels, i).strip()
+        href = _safe_href(at(hrefs, i))
+        if label and href:
+            out.append({"label": label, "href": href})
+        if len(out) >= FOOTER_NAV_MAX:
+            break
     return out

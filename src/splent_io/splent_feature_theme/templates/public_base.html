@@ -106,6 +106,14 @@
                 <span class="site-footer__name">{{ site.name }}</span>
                 {% if site.tagline %}<span class="site-footer__tagline">{{ site.tagline }}</span>{% endif %}
             </div>
+            {# Admin-managed footer links (Menus editor, site_footer_nav):
+               a discreet row of plain links before the social list. No
+               markup at all when the admin stored none. #}
+            {% if site.footer_nav %}
+            <ul class="site-footer-nav">
+                {% for item in site.footer_nav %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}
+            </ul>
+            {% endif %}
             <ul class="site-social">
                 {% for s in site.social %}<li><a href="{{ s.href }}" target="_blank" rel="noopener" title="{{ s.network }}">{{ s.network }}</a></li>{% endfor %}
                 {% for hook in get_template_hooks("layout.footer") %}{{ hook() | safe }}{% endfor %}

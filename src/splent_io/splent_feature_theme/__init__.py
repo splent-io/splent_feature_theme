@@ -75,9 +75,13 @@ def inject_context_vars(app):
     # via register_nav_item) reconciled with the admin Menus editor's runtime
     # override (order / visibility / label + custom links). Falls back to legacy
     # SITE_NAV. Labels are translated to follow the active locale.
-    from splent_io.splent_feature_theme.nav import compose_nav
+    from splent_io.splent_feature_theme.nav import compose_footer_nav, compose_nav
 
     nav = compose_nav(app, _translate)
+    # The footer links row is admin-managed too (Menus editor, key
+    # site_footer_nav) but custom links only, so there is no reconciliation.
+    # The shell renders it before the social list and skips it when empty.
+    footer_nav = compose_footer_nav(app, _translate)
 
     # {{ auto_breadcrumb(page_title, mode) }} — the derived trail for the
     # current request, or None when the mode hides it there. Bound to the
@@ -98,6 +102,7 @@ def inject_context_vars(app):
         ),
         "tagline": _s("site_tagline", app.config.get("SITE_TAGLINE", "")),
         "nav": nav,
+        "footer_nav": footer_nav,
         "social": app.config.get("SITE_SOCIAL", []),
         "event": app.config.get("SITE_EVENT", {}),
         "sponsors": app.config.get("SITE_SPONSORS", []),

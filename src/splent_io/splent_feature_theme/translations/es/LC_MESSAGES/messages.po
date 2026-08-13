@@ -235,3 +235,20 @@ msgstr "Añadir enlace personalizado"
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:73
 msgid "Save menu"
 msgstr "Guardar menú"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:76
+msgid "Footer links"
+msgstr "Enlaces del pie de página"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:78
+msgid ""
+"A row of plain links shown in the site footer, before the social links. A"
+" row is saved only with both a label and an address."
+msgstr ""
+"Una fila de enlaces sencillos que se muestra en el pie de página del "
+"sitio, antes de los enlaces sociales. Una fila solo se guarda con "
+"etiqueta y dirección."
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:95
+msgid "Add footer link"
+msgstr "Añadir enlace al pie"

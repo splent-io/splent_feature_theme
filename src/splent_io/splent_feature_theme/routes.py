@@ -93,15 +93,32 @@ def admin_menus():
     relabels them and may add custom external links. The override is stored
     under the ``site_nav`` setting and reconciled with the feature entries at
     render time.
+
+    The same screen also edits the footer links row — custom links only, no
+    feature reconciliation — stored under ``site_footer_nav`` and rendered by
+    the public shell before the social list. One form saves both sections.
     """
-    from splent_io.splent_feature_theme.nav import editor_rows, parse_override
+    from splent_io.splent_feature_theme.nav import (
+        editor_rows,
+        footer_editor_rows,
+        parse_footer_links,
+        parse_override,
+    )
 
     if request.method == "POST":
         override = parse_override(request.form)
-        service_proxy("SettingsService").set(
-            "site_nav", json.dumps(override, ensure_ascii=False)
+        footer_links = parse_footer_links(request.form)
+        service_proxy("SettingsService").set_many(
+            {
+                "site_nav": json.dumps(override, ensure_ascii=False),
+                "site_footer_nav": json.dumps(footer_links, ensure_ascii=False),
+            }
         )
         flash(_("Menu updated."), "success")
         return redirect(url_for("theme.admin_menus"))
 
-    return render_template("theme/admin/menus.html", rows=editor_rows(current_app))
+    return render_template(
+        "theme/admin/menus.html",
+        rows=editor_rows(current_app),
+        footer_rows=footer_editor_rows(current_app),
+    )

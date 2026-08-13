@@ -313,6 +313,11 @@ a:hover { text-decoration: underline; }
 .site-footer__brand { display: flex; flex-direction: column; gap: .3rem; max-width: 32rem; }
 .site-footer__name { font-family: var(--brand-font-display); font-weight: 700; font-size: 1.15rem; color: var(--brand-heading); }
 .site-footer__tagline { color: var(--brand-muted); font-size: .9rem; }
+/* Admin-managed footer links (Menus editor): a discreet muted row that wraps,
+   sitting before the social list and quieter than it. */
+.site-footer-nav { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; padding: 0; margin: 0; }
+.site-footer-nav a { color: var(--brand-muted); font-size: .9rem; }
+.site-footer-nav a:hover { color: var(--brand-primary); text-decoration: none; }
 .site-social { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; padding: 0; margin: 0; }
 .site-social a { color: var(--brand-text); font-weight: 600; font-size: .9rem; }
 .site-social a:hover { color: var(--brand-primary); text-decoration: none; }
