@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-10 15:13+0000\n"
+"POT-Creation-Date: 2026-08-16 16:02+0000\n"
 "PO-Revision-Date: 2026-08-10 10:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,41 +18,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/splent_io/splent_feature_theme/hooks.py:64
+#: src/splent_io/splent_feature_theme/breadcrumbs.py:38
+msgid "Home"
+msgstr "Inicio"
+
+#: src/splent_io/splent_feature_theme/hooks.py:69
 #: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:3
 #: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:7
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/splent_io/splent_feature_theme/hooks.py:79
+#: src/splent_io/splent_feature_theme/hooks.py:84
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:3
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:12
 msgid "Menus"
 msgstr "Menús"
 
-#: src/splent_io/splent_feature_theme/routes.py:63
+#: src/splent_io/splent_feature_theme/routes.py:83
 msgid "Appearance updated."
 msgstr "Apariencia actualizada."
 
-#: src/splent_io/splent_feature_theme/routes.py:87
+#: src/splent_io/splent_feature_theme/routes.py:120
 msgid "Menu updated."
 msgstr "Menú actualizado."
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:37
+#: src/splent_io/splent_feature_theme/templates/public_base.html:52
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:52
+msgid "Previous"
+msgstr "Anterior"
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:52
+msgid "Next"
+msgstr "Siguiente"
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:53
+msgid "Start slideshow"
+msgstr "Iniciar pase de diapositivas"
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:53
+msgid "Pause slideshow"
+msgstr "Pausar pase de diapositivas"
+
+#: src/splent_io/splent_feature_theme/templates/public_base.html:65
 msgid "Menu"
 msgstr "Menú"
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:40
+#: src/splent_io/splent_feature_theme/templates/public_base.html:68
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:26
 msgid "Main navigation"
 msgstr "Navegación principal"
 
-#: src/splent_io/splent_feature_theme/templates/public_base.html:83
+#: src/splent_io/splent_feature_theme/templates/public_base.html:126
 msgid "Made with"
 msgstr "Hecho con"
 
 #: src/splent_io/splent_feature_theme/templates/blocks/breadcrumb.html:13
 msgid "Breadcrumb"
 msgstr "Ruta de navegación"
+
+#: src/splent_io/splent_feature_theme/templates/errors/404.html:3
+#: src/splent_io/splent_feature_theme/templates/errors/404.html:41
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:72
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+#: src/splent_io/splent_feature_theme/templates/errors/404.html:42
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:77
+msgid "The page you are looking for does not exist or has moved."
+msgstr "La página que buscas no existe o se ha movido."
+
+#: src/splent_io/splent_feature_theme/templates/errors/404.html:43
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:82
+msgid "Back to the home page"
+msgstr "Volver a la página de inicio"
 
 #: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:20
 msgid "Site"
@@ -90,27 +131,23 @@ msgstr "Solo texto"
 msgid "Logo height (px)"
 msgstr "Alto del logotipo (px)"
 
-#: src/splent_io/splent_feature_theme/breadcrumbs.py:38
-msgid "Home"
-msgstr "Inicio"
-
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:52
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:51
 msgid "Breadcrumbs"
 msgstr "Ruta de navegación"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:55
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:54
 msgid "Only on deeper pages"
 msgstr "Solo en páginas interiores"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:55
 msgid "On every page"
 msgstr "En todas las páginas"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:57
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
 msgid "Never"
 msgstr "Nunca"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:59
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:58
 msgid ""
 "The trail under the header that shows where the reader is. Pages that "
 "bring their own trail keep it."
@@ -118,39 +155,63 @@ msgstr ""
 "La ruta bajo la cabecera que muestra dónde está el lector. Las páginas "
 "que aportan su propia ruta la conservan."
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:56
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:66
+msgid "Error page"
+msgstr "Página de error"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:70
+msgid "Title"
+msgstr "Título"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:75
+msgid "Message"
+msgstr "Mensaje"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:80
+msgid "Button label"
+msgstr "Texto del botón"
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:83
+msgid ""
+"What the page says when a reader lands on a missing address. Empty fields"
+" keep the translated defaults."
+msgstr ""
+"Lo que dice la página cuando alguien llega a una dirección inexistente. "
+"Los campos vacíos mantienen los textos traducidos por defecto."
+
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:90
 msgid "Colors"
 msgstr "Colores"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:61
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:95
 msgid "Primary"
 msgstr "Primario"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:65
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:99
 msgid "Accent"
 msgstr "Acento"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:69
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:103
 msgid "Background"
 msgstr "Fondo"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:73
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:107
 msgid "Surface"
 msgstr "Superficie"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:77
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:111
 msgid "Text"
 msgstr "Texto"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:81
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:115
 msgid "Heading"
 msgstr "Encabezados"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:87
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:121
 msgid "Changes apply immediately."
 msgstr "Los cambios se aplican al instante."
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:88
+#: src/splent_io/splent_feature_theme/templates/theme/admin/appearance.html:122
 msgid "Save changes"
 msgstr "Guardar cambios"
 
@@ -165,76 +226,80 @@ msgstr ""
 "renombrarlas u ocultarlas, y añadir enlaces externos personalizados. Los "
 "cambios se aplican al instante."
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:34
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:83
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:35
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:106
 msgid "custom"
 msgstr "personalizado"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:35
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:36
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:84
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:107
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:120
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:37
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:59
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:38
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:60
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:86
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:109
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:122
 msgid "Move up"
 msgstr "Subir"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:38
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:60
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:87
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:110
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:123
 msgid "Move down"
 msgstr "Bajar"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:62
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:111
 msgid "Show or hide"
 msgstr "Mostrar u ocultar"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:98
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:62
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:111
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:133
 msgid "Hide"
 msgstr "Ocultar"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:39
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:61
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:99
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:62
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:134
 msgid "Show"
 msgstr "Mostrar"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:40
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:63
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:89
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:41
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:64
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:88
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:112
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:124
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:52
 msgid "This feature is no longer installed"
 msgstr "Esta funcionalidad ya no está instalada"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:51
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:52
 msgid "not installed"
 msgstr "no instalada"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:53
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:54
 msgid "feature"
 msgstr "funcionalidad"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:57
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:58
 msgid "(unavailable)"
 msgstr "(no disponible)"
 
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:72
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:73
 msgid "Add custom link"
 msgstr "Añadir enlace personalizado"
-
-#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:73
-msgid "Save menu"
-msgstr "Guardar menú"
 
 #: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:76
 msgid "Footer links"
@@ -253,26 +318,7 @@ msgstr ""
 msgid "Add footer link"
 msgstr "Añadir enlace al pie"
 
-msgid "Page not found"
-msgstr "Página no encontrada"
+#: src/splent_io/splent_feature_theme/templates/theme/admin/menus.html:96
+msgid "Save menu"
+msgstr "Guardar menú"
 
-msgid "The page you are looking for does not exist or has moved."
-msgstr "La página que buscas no existe o se ha movido."
-
-msgid "Back to the home page"
-msgstr "Volver a la página de inicio"
-
-msgid "Error page"
-msgstr "Página de error"
-
-msgid "Title"
-msgstr "Título"
-
-msgid "Message"
-msgstr "Mensaje"
-
-msgid "Button label"
-msgstr "Texto del botón"
-
-msgid "What the page says when a reader lands on a missing address. Empty fields keep the translated defaults."
-msgstr "Lo que dice la página cuando alguien llega a una dirección inexistente. Los campos vacíos mantienen los textos traducidos por defecto."

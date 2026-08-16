@@ -32,7 +32,10 @@
     <meta name="twitter:card" content="summary">
     {% endif %}
 
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    {# The product's own icons, whichever files it ships (see theme.__init__). #}
+    {% for ic in site.icons %}
+    <link rel="{{ ic.rel }}" type="{{ ic.type }}"{% if ic.sizes %} sizes="{{ ic.sizes }}"{% endif %} href="{{ url_for('static', filename=ic.file) }}">
+    {% endfor %}
 
     {% if theme_tokens and theme_tokens.font_url %}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +51,9 @@
     {% for hook in get_template_hooks("layout.head") %}{{ hook() | safe }}{% endfor %}
 </head>
 
-<body class="cms-public">
+<body class="cms-public"
+      data-lightbox-close="{{ _('Close') }}" data-lightbox-prev="{{ _('Previous') }}" data-lightbox-next="{{ _('Next') }}"
+      data-lightbox-play="{{ _('Start slideshow') }}" data-lightbox-pause="{{ _('Pause slideshow') }}">
 
     {% for hook in get_template_hooks("layout.body_start") %}{{ hook() | safe }}{% endfor %}
 
@@ -64,7 +69,7 @@
                 <span></span><span></span><span></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="{{ _('Main navigation') }}">
-                {% for item in site.nav %}{% set h = item.href.rstrip('/') %}{% set on = (request.path == h) or (h == '' and request.path == '/') or (h != '' and request.path.startswith(h + '/')) %}<a href="{{ item.href }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
+                {% for item in site.nav %}{% set h = item.href.rstrip('/') %}{% set on = (request.path == h) or (h == '' and request.path == '/') or (h != '' and request.path.startswith(h + '/')) %}{% if item.children %}<div class="site-nav__group{% if on %} is-active{% endif %}"><a href="{{ item.href }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a><button class="site-nav__caret" type="button" aria-haspopup="true" aria-expanded="false" aria-label="{{ item.label }}"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><ul class="site-nav__menu">{% for child in item.children %}<li><a href="{{ child.href }}"{% if child.current %} class="is-current"{% endif %}>{{ child.label }}</a></li>{% endfor %}</ul></div>{% else %}<a href="{{ item.href }}"{% if on %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>{% endif %}{% endfor %}
                 {% for hook in get_template_hooks("layout.nav") %}{{ hook() | safe }}{% endfor %}
                 {% if site.locales and site.locales | length > 1 %}
                 <span class="lang-switch">
@@ -142,6 +147,22 @@
                 nav.classList.remove("is-open");
                 var t = document.querySelector(".site-nav-toggle");
                 if (t) t.setAttribute("aria-expanded", "false");
+            }
+            /* Nav dropdowns: the caret toggles on touch/click (hover and
+               focus-within already open them for mouse and keyboard). */
+            var caret = e.target.closest(".site-nav__caret");
+            var groups = document.querySelectorAll(".site-nav__group.is-open");
+            groups.forEach(function (g) {
+                if (!caret || g !== caret.parentNode) {
+                    g.classList.remove("is-open");
+                    var b = g.querySelector(".site-nav__caret");
+                    if (b) b.setAttribute("aria-expanded", "false");
+                }
+            });
+            if (caret) {
+                var g2 = caret.parentNode;
+                var isOpen = g2.classList.toggle("is-open");
+                caret.setAttribute("aria-expanded", isOpen ? "true" : "false");
             }
         });
     </script>

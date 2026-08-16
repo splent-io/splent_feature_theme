@@ -71,6 +71,29 @@ a:hover { text-decoration: underline; }
    `.cms-public .site-nav a`; token-driven, works for both products. */
 .cms-public .site-nav a.is-active { color: var(--brand-primary); font-weight: 700; }
 
+/* ── Nav dropdown: an entry with children (feature nav "children") ─────── */
+/* CSS-only: opens on hover and on keyboard focus within; the caret button
+   is there so touch and keyboard users have a target that is not the link. */
+.site-nav__group { position: relative; display: inline-flex; align-items: center; gap: .15rem; }
+.site-nav__caret {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.4rem; height: 1.4rem; padding: 0; border: 0; border-radius: 6px;
+    background: none; color: var(--brand-muted); cursor: pointer;
+}
+.site-nav__caret:hover, .site-nav__group:focus-within .site-nav__caret { color: var(--brand-primary); }
+.site-nav__menu {
+    display: none; position: absolute; top: 100%; left: 0; z-index: 30;
+    min-width: 14rem; margin: .35rem 0 0; padding: .4rem 0; list-style: none;
+    background: var(--brand-bg); border: 1px solid var(--brand-border);
+    border-radius: var(--brand-radius); box-shadow: 0 14px 28px rgba(0, 0, 0, .12);
+}
+.site-nav__group:hover .site-nav__menu,
+.site-nav__group:focus-within .site-nav__menu,
+.site-nav__group.is-open .site-nav__menu { display: block; }
+.site-nav__menu li a { display: block; padding: .45rem 1rem; font-weight: 500; white-space: nowrap; }
+.site-nav__menu li a:hover { background: color-mix(in srgb, var(--brand-primary) 8%, transparent); }
+.cms-public .site-nav__menu li a.is-current { color: var(--brand-primary); font-weight: 700; }
+
 /* ── Mobile nav: hamburger toggle ───────────────────────────────────────── */
 .site-nav-toggle { display: none; }
 
@@ -112,6 +135,11 @@ a:hover { text-decoration: underline; }
         box-shadow: 0 14px 28px rgba(0, 0, 0, .1);
     }
     .site-nav.is-open { display: flex; }
+    /* In the stacked mobile menu the sub-entries simply follow their entry. */
+    .site-nav__group { flex-direction: column; align-items: flex-start; }
+    .site-nav__caret { display: none; }
+    .site-nav__menu { display: block; position: static; min-width: 0; margin: .25rem 0 0 .75rem; padding: 0; border: 0; box-shadow: none; background: transparent; }
+    .site-nav__menu li a { padding: .3rem 0; }
 }
 .lang-switch { display: inline-flex; gap: .25rem; margin-left: .35rem; }
 .lang-switch__opt { font-size: .78rem; font-weight: 700; padding: .15rem .4rem; border-radius: 6px; color: var(--brand-muted); }
@@ -655,13 +683,19 @@ a:hover { text-decoration: underline; }
 }
 
 /* ── Lightbox ──────────────────────────────────────────────────────────── */
-/* Rich-text images and anything marked data-lightbox open full-screen
- * (lightbox.js). The cursor tells the reader the image is expandable. */
+/* Rich-text images, anything marked data-lightbox and every image of a
+ * gallery (.gallery-grid or [data-lightbox-gallery]) open large over the
+ * darkened page (lightbox.js), with previous/next and a slideshow inside a
+ * gallery. The cursor tells the reader the image is expandable. */
 .prose img,
 img[data-lightbox],
-[data-lightbox] img {
+[data-lightbox] img,
+[data-lightbox-gallery] img,
+.gallery-grid img {
     cursor: zoom-in;
 }
+
+body.lightbox-open { overflow: hidden; }
 
 .lightbox {
     position: fixed;
@@ -670,31 +704,93 @@ img[data-lightbox],
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.86);
+    padding: 3.5rem 4rem 2.5rem;
+    background: rgba(0, 0, 0, 0.9);
     cursor: zoom-out;
+}
+
+.lightbox__figure {
+    margin: 0;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    cursor: default;
 }
 
 .lightbox__img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: calc(100vh - 8rem);
     border-radius: var(--brand-radius);
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
-}
-
-.lightbox__close {
-    position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    border: 0;
-    background: none;
-    color: #fff;
-    font-size: 2.25rem;
-    line-height: 1;
     cursor: pointer;
-    opacity: 0.8;
 }
 
-.lightbox__close:hover {
-    opacity: 1;
+.lightbox--gallery .lightbox__img { cursor: e-resize; }
+
+.lightbox__caption {
+    max-width: 70ch;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: .95rem;
+}
+
+.lightbox__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .25rem;
+    padding: .75rem 1rem;
+    cursor: default;
+}
+
+.lightbox__counter {
+    margin-right: auto;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: .9rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.lightbox__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity .15s ease, background .15s ease;
+}
+
+.lightbox__btn svg { width: 1.35rem; height: 1.35rem; }
+.lightbox__btn:hover, .lightbox__btn:focus-visible { opacity: 1; background: rgba(255, 255, 255, 0.18); outline: none; }
+.lightbox__play[aria-pressed="true"] { background: rgba(255, 255, 255, 0.25); }
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.25rem;
+    height: 3.25rem;
+}
+.lightbox__nav--prev { left: 1rem; }
+.lightbox__nav--next { right: 1rem; }
+
+@media (max-width: 640px) {
+    .lightbox { padding: 3.25rem .5rem 1.5rem; }
+    .lightbox__nav { width: 2.5rem; height: 2.5rem; background: rgba(0, 0, 0, 0.35); }
+    .lightbox__nav--prev { left: .25rem; }
+    .lightbox__nav--next { right: .25rem; }
+    .lightbox__img { max-height: calc(100vh - 6rem); }
 }

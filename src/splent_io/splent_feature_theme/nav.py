@@ -22,7 +22,7 @@ links only — no feature entries, so there is nothing to reconcile.
 
 import json
 
-from splent_framework.nav.nav_registry import get_nav_items
+from splent_framework.nav.nav_registry import get_nav_items, resolve_children
 
 # The Footer links section never stores more rows than this; a footer that
 # needs more links than fit on two lines is a design problem, not a menu.
@@ -81,19 +81,30 @@ def compose_nav(app, translate):
             seen.add(key)
             if entry.get("visible", True):
                 label = (entry.get("label") or "").strip() or item["label"]
-                nav.append({"label": translate(label), "href": item["href"]})
+                nav.append(_entry(item, translate(label)))
         for item in base:  # installed but not yet in the override -> append
             if item["key"] not in seen:
-                nav.append({"label": translate(item["label"]), "href": item["href"]})
+                nav.append(_entry(item, translate(item["label"])))
         return nav
 
     if base:
-        return [{"label": translate(i["label"]), "href": i["href"]} for i in base]
+        return [_entry(i, translate(i["label"])) for i in base]
 
     return [
         {**item, "label": translate(item["label"])} if item.get("label") else item
         for item in app.config.get("SITE_NAV", [])
     ]
+
+
+def _entry(item, label):
+    """One render-ready nav entry. Sub-entries (a feature's ``children``,
+    resolved now) make the theme draw a dropdown; the entry itself stays a
+    link, so the menu works with the keyboard and without JavaScript."""
+    entry = {"label": label, "href": item["href"]}
+    children = resolve_children(item)
+    if children:
+        entry["children"] = children
+    return entry
 
 
 def editor_rows(app):

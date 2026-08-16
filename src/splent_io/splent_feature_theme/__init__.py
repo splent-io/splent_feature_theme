@@ -27,6 +27,12 @@ def init_feature(app):
     register_asset(
         "js", "theme.assets", order=0, subfolder="js", filename="lightbox.js"
     )
+    # Countdown to a date. Any block that renders .countdown[data-target]
+    # (the home hero, an edition page) gets a live timer without shipping
+    # its own script; the markup contract is documented in the file.
+    register_asset(
+        "js", "theme.assets", order=0, subfolder="js", filename="countdown.js"
+    )
 
 
 def _make_render_block():
@@ -42,6 +48,30 @@ def _make_render_block():
         return Markup(render_template(f"blocks/{name}.html", **context))
 
     return render_block
+
+
+_ICON_FILES = (
+    ("favicon.ico", "icon", "image/x-icon", ""),
+    ("favicon.svg", "icon", "image/svg+xml", ""),
+    ("favicon-32.png", "icon", "image/png", "32x32"),
+    ("favicon-192.png", "icon", "image/png", "192x192"),
+    ("favicon-512.png", "icon", "image/png", "512x512"),
+    ("apple-touch-icon.png", "apple-touch-icon", "image/png", "180x180"),
+)
+
+
+def _shipped_icons(app):
+    """The icon files present in the product's static folder, in link order."""
+    import os
+
+    folder = app.static_folder
+    if not folder:
+        return []
+    out = []
+    for name, rel, mime, sizes in _ICON_FILES:
+        if os.path.exists(os.path.join(folder, name)):
+            out.append({"file": name, "rel": rel, "type": mime, "sizes": sizes})
+    return out
 
 
 def inject_context_vars(app):
@@ -122,6 +152,12 @@ def inject_context_vars(app):
     site["og_image"] = bool(
         app.static_folder and os.path.exists(os.path.join(app.static_folder, "og.png"))
     )
+    # Icons: the shell links whichever of these the product ships in its
+    # static folder, so a product with a real logo just drops the files
+    # (favicon.ico, favicon-32.png, favicon-192.png, apple-touch-icon.png,
+    # favicon-512.png) and never edits a template; favicon.svg alone still
+    # works as before. Checked once per request; the folder is small.
+    site["icons"] = _shipped_icons(app)
     try:
         from flask_babel import get_locale as _get_locale
 
